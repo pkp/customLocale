@@ -20,40 +20,44 @@ class CustomLocalePlugin extends GenericPlugin {
 	 * @param $category string Plugin category
 	 * @param $path string Plugin path
 	 */
-	function register($category, $path) {
-		if (parent::register($category, $path)) {
-			if ($this->getEnabled()) {
+	/* UZH CHANGE OJS-74 2019/03/05/mb adapt to OJS 3.1.2 */
+	function register($category, $path, $mainContextId = null) {
+		$success = parent::register($category, $path, $mainContextId);
+		if ($success && $this->getEnabled()) {
 
-				// Add custom locale data for already registered locale files.
-				$locale = AppLocale::getLocale();
-				$localeFiles = AppLocale::getLocaleFiles($locale);
+			// Add custom locale data for already registered locale files.
+			$locale = AppLocale::getLocale();
+			$localeFiles = AppLocale::getLocaleFiles($locale);
 
-				$context = Request::getContext();
-				$contextId = $context->getId();
+			$context = Request::getContext();
+			$contextId = $context->getId();
 
-				$publicFilesDir = Config::getVar('files', 'public_files_dir');
-				$customLocalePathBase = "$publicFilesDir/presses/$contextId/" . CUSTOM_LOCALE_DIR . "/$locale/";
+			$publicFilesDir = Config::getVar('files', 'public_files_dir');
+			/* UZH CHANGE OJS-71 2019/03/22/mb set path according to application name (OJS or OMP) */
+			/* $customLocalePathBase = "$publicFilesDir/presses/$contextId/" . CUSTOM_LOCALE_DIR . "/$locale/"; */
+			$fileDirectories = Application::getFileDirectories();
+			$contextDir = $fileDirectories['context'];
+			$customLocalePathBase = "$publicFilesDir" . $contextDir . "$contextId/" . CUSTOM_LOCALE_DIR . "/$locale/";
+			/* END UZH CHANGE OJS-71 */
 
-				import('lib.pkp.classes.file.FileManager');
-				$fileManager = new FileManager();
-				foreach ($localeFiles as $localeFile) {
-					$customLocalePath = $customLocalePathBase . $localeFile->getFilename();
-					if ($fileManager->fileExists($customLocalePath)) {
-						AppLocale::registerLocaleFile($locale, $customLocalePath, false);
-					}
+			import('lib.pkp.classes.file.FileManager');
+			$fileManager = new FileManager();
+			foreach ($localeFiles as $localeFile) {
+				$customLocalePath = $customLocalePathBase . $localeFile->getFilename();
+				if ($fileManager->fileExists($customLocalePath)) {
+					AppLocale::registerLocaleFile($locale, $customLocalePath, false);
 				}
-
-				// Add custom locale data for all locale files registered after this plugin
-				HookRegistry::register('PKPLocale::registerLocaleFile', array(&$this, 'addCustomLocale'));
-				HookRegistry::register('LoadComponentHandler', array($this, 'setupGridHandler'));
-				HookRegistry::register('Templates::Management::Settings::website', array($this, 'callbackShowWebsiteSettingsTabs'));
-				HookRegistry::register('LoadHandler', array($this, 'handleLoadRequest'));
 			}
 
-			return true;
+			// Add custom locale data for all locale files registered after this plugin
+			HookRegistry::register('PKPLocale::registerLocaleFile', array(&$this, 'addCustomLocale'));
+			HookRegistry::register('LoadComponentHandler', array($this, 'setupGridHandler'));
+			HookRegistry::register('Templates::Management::Settings::website', array($this, 'callbackShowWebsiteSettingsTabs'));
+			HookRegistry::register('LoadHandler', array($this, 'handleLoadRequest'));
 		}
-		return false;
+		return $success;
 	}
+	/* END UZH CHANGE OJS-74 */
 
 	/**
 	 * Permit requests to the custom locale grid handler
@@ -143,7 +147,12 @@ class CustomLocalePlugin extends GenericPlugin {
 		$contextId = $context->getId();
 
 		$publicFilesDir = Config::getVar('files', 'public_files_dir');
-		$customLocalePath = "$publicFilesDir/presses/$contextId/" . CUSTOM_LOCALE_DIR . "/$locale/$localeFilename";
+		/* UZH CHANGE OJS-71 2019/03/22/mb set path according to application name (OJS or OMP) */
+		/* $customLocalePath = "$publicFilesDir/presses/$contextId/" . CUSTOM_LOCALE_DIR . "/$locale/$localeFilename"; */
+		$fileDirectories = Application::getFileDirectories();
+		$contextDir = $fileDirectories['context'];
+		$customLocalePath = "$publicFilesDir" . $contextDir . "$contextId/" . CUSTOM_LOCALE_DIR . "/$locale/$localeFilename";
+		/* END UZH CHANGE OJS-71 */
 
 		import('lib.pkp.classes.file.FileManager');
 		$fileManager = new FileManager();
@@ -186,13 +195,6 @@ class CustomLocalePlugin extends GenericPlugin {
 
 		// Permit other plugins to continue interacting with this hook
 		return false;
-	}
-
-	/**
-	 * @copydoc PKPPlugin::getTemplatePath
-	 */
-	function getTemplatePath() {
-		return parent::getTemplatePath() . 'templates/';
 	}
 
 }

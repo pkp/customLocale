@@ -33,7 +33,9 @@ class LocaleFileForm extends Form {
 	 * @param $locale string
 	 */
 	function __construct($customLocalePlugin, $contextId, $filePath, $locale) {
-		parent::__construct($customLocalePlugin->getTemplatePath() . 'localeFile.tpl');
+		/* UZH CHANGE OJS-74 2019/03/05/mb adapt to OJS 3.1.2 */
+		/* parent::__construct($customLocalePlugin->getTemplatePath() . 'localeFile.tpl'); */
+		parent::__construct($customLocalePlugin->getTemplateResource('localeFile.tpl'));
 		$this->filePath = $filePath;
 		$this->locale = $locale;
 
@@ -61,7 +63,12 @@ class LocaleFileForm extends Form {
 
 
 		$publicFilesDir = Config::getVar('files', 'public_files_dir');
-		$customLocaleDir = $publicFilesDir . "/presses/$contextId/" . CUSTOM_LOCALE_DIR;
+		/* UZH CHANGE OJS-71 2019/03/22/mb set path according to application name (OJS or OMP) */
+		/* $customLocaleDir = $publicFilesDir . "/presses/$contextId/" . CUSTOM_LOCALE_DIR; */
+		$fileDirectories = Application::getFileDirectories();
+                $contextDir = $fileDirectories['context'];
+		$customLocaleDir = $publicFilesDir . $contextDir . "$contextId/" . CUSTOM_LOCALE_DIR;
+		/* END UZH CHANGE OJS-71 */
 		$customLocalePath = "$customLocaleDir/$locale/$file";
 
 		if ($fileManager->fileExists($customLocalePath)) {

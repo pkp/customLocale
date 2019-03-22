@@ -36,8 +36,9 @@ class CustomLocaleGridHandler extends GridHandler {
 	 */
 	function __construct() {
 		parent::__construct();
+		/* UZH CHANGE OJS-71 fix for role bug */
 		$this->addRoleAssignment(
-			array(ROLE_ID_MANAGER),
+			array(ROLE_ID_MANAGER,ROLE_ID_SITE_ADMIN),
 			array('fetchGrid', 'index', 'editLocaleFile', 'updateLocale')
 		);
 	}
@@ -71,8 +72,11 @@ class CustomLocaleGridHandler extends GridHandler {
 			// save changes
 			$changes = $args['changes'];
 
+			/* UZH CHANGE OJS-72 2019/02/26/mb */
+			/* $customFilesDir = Config::getVar('files', 'public_files_dir') .
+				"/presses/$contextId/" . CUSTOM_LOCALE_DIR . "/$locale"; */
 			$customFilesDir = Config::getVar('files', 'public_files_dir') .
-				"/presses/$contextId/" . CUSTOM_LOCALE_DIR . "/$locale";
+                                "/journals/$contextId/" . CUSTOM_LOCALE_DIR . "/$locale";
 			$customFilePath = "$customFilesDir/$filename";
 
 			// Create empty custom locale file if it doesn't exist
@@ -241,8 +245,10 @@ class CustomLocaleGridHandler extends GridHandler {
 	 */
 	function getFilterForm() {
 		$customLocalePlugin = self::$plugin;
-		$templatePath = $customLocalePlugin->getTemplatePath();
-		return $templatePath . 'customLocaleGridFilter.tpl';
+		/* UZH CHANGE OJS-74 2019/03/05/mb adapt to OJS 3.1.2 */
+		/* $templatePath = $customLocalePlugin->getTemplatePath(); */
+		/* return $templatePath . 'customLocaleGridFilter.tpl'; */
+		return $customLocalePlugin->getTemplateResource('customLocaleGridFilter.tpl');
 	}
 
 	/**
