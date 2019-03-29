@@ -72,12 +72,15 @@ class CustomLocaleGridHandler extends GridHandler {
 			// save changes
 			$changes = $args['changes'];
 
-			/* UZH CHANGE OJS-72 2019/02/26/mb */
+			/* UZH CHANGE OJS-71 2019/03/29/mb set path according to application name (OJS or OMP) */
 			/* $customFilesDir = Config::getVar('files', 'public_files_dir') .
 				"/presses/$contextId/" . CUSTOM_LOCALE_DIR . "/$locale"; */
-			$customFilesDir = Config::getVar('files', 'public_files_dir') .
-                                "/journals/$contextId/" . CUSTOM_LOCALE_DIR . "/$locale";
-			$customFilePath = "$customFilesDir/$filename";
+			$publicFilesDir = Config::getVar('files', 'public_files_dir');
+			$fileDirectories = Application::getFileDirectories();
+			$contextDir = $fileDirectories['context'];
+			$customFilePath = "$publicFilesDir" . $contextDir . "$contextId/" . 
+				CUSTOM_LOCALE_DIR . "/$locale/$filename";
+			/* END UZH CHANGE OJS-71 */
 
 			// Create empty custom locale file if it doesn't exist
 			import('lib.pkp.classes.file.FileManager');
