@@ -21,12 +21,11 @@ class CustomLocaleHandler extends Handler {
 		$context = $request->getContext();
 		$contextId = $context->getId();
 
-		$publicFilesDir = Config::getVar('files', 'public_files_dir');
-		/* UZH CHANGE OJS-71 2019/03/22/mb */
+		/* UZH CHANGE OJS-71 2019/03/29/mb set path according to application (OJS or OMP) */
+		/* $publicFilesDir = Config::getVar('files', 'public_files_dir'); */
 		/* $customLocaleDir = "$publicFilesDir/presses/$contextId/" . CUSTOM_LOCALE_DIR; */
-		$fileDirectories = Application::getFileDirectories();
-		$contextDir = $fileDirectories['context'];
-		$customLocaleDir = "$publicFilesDir" . $contextDir . "$contextId/" . CUSTOM_LOCALE_DIR;
+		$contextDir = PublicFileManager::getContextFilesPath(Application::getContextAssocType(), $contextId);
+		$customLocaleDir = "$contextDir/" . CUSTOM_LOCALE_DIR;
 		/* END UZH CHANGE OJS-71 */
 
 		$absolutePath = dirname(__FILE__);

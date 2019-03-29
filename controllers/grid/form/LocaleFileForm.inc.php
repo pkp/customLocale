@@ -61,15 +61,14 @@ class LocaleFileForm extends Form {
 		$context = $request->getContext();
 		$contextId = $context->getId();
 
-
-		$publicFilesDir = Config::getVar('files', 'public_files_dir');
-		/* UZH CHANGE OJS-71 2019/03/22/mb set path according to application name (OJS or OMP) */
+		/* UZH CHANGE OJS-71 2019/03/29/mb set path according to application (OJS or OMP) */
+		/* $publicFilesDir = Config::getVar('files', 'public_files_dir'); */
 		/* $customLocaleDir = $publicFilesDir . "/presses/$contextId/" . CUSTOM_LOCALE_DIR; */
-		$fileDirectories = Application::getFileDirectories();
-                $contextDir = $fileDirectories['context'];
-		$customLocaleDir = $publicFilesDir . $contextDir . "$contextId/" . CUSTOM_LOCALE_DIR;
+		/* $customLocalePath = "$customLocaleDir/$locale/$file"; */
+		$contextDir = PublicFileManager::getContextFilesPath(Application::getContextAssocType(), $contextId);
+		$customLocalePath = "$contextDir/" . CUSTOM_LOCALE_DIR . "/$locale/$file";
 		/* END UZH CHANGE OJS-71 */
-		$customLocalePath = "$customLocaleDir/$locale/$file";
+		
 
 		if ($fileManager->fileExists($customLocalePath)) {
 			$localeContents = EditableLocaleFile::load($customLocalePath);

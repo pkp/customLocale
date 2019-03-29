@@ -32,12 +32,11 @@ class CustomLocalePlugin extends GenericPlugin {
 			$context = Request::getContext();
 			$contextId = $context->getId();
 
-			$publicFilesDir = Config::getVar('files', 'public_files_dir');
-			/* UZH CHANGE OJS-71 2019/03/22/mb set path according to application name (OJS or OMP) */
+			/* UZH CHANGE OJS-71 2019/03/29/mb set path according to application (OJS or OMP) */
+			/* $publicFilesDir = Config::getVar('files', 'public_files_dir'); */
 			/* $customLocalePathBase = "$publicFilesDir/presses/$contextId/" . CUSTOM_LOCALE_DIR . "/$locale/"; */
-			$fileDirectories = Application::getFileDirectories();
-			$contextDir = $fileDirectories['context'];
-			$customLocalePathBase = "$publicFilesDir" . $contextDir . "$contextId/" . CUSTOM_LOCALE_DIR . "/$locale/";
+			$contextDir = PublicFileManager::getContextFilesPath(Application::getContextAssocType(), $contextId);
+			$customLocalePathBase = "$contextDir/" . CUSTOM_LOCALE_DIR . "/$locale/";
 			/* END UZH CHANGE OJS-71 */
 
 			import('lib.pkp.classes.file.FileManager');
@@ -146,12 +145,11 @@ class CustomLocalePlugin extends GenericPlugin {
 		$context = $request->getContext();
 		$contextId = $context->getId();
 
-		$publicFilesDir = Config::getVar('files', 'public_files_dir');
-		/* UZH CHANGE OJS-71 2019/03/22/mb set path according to application name (OJS or OMP) */
+		/* UZH CHANGE OJS-71 2019/03/29/mb set path according to application (OJS or OMP) */
+		/* $publicFilesDir = Config::getVar('files', 'public_files_dir'); */
 		/* $customLocalePath = "$publicFilesDir/presses/$contextId/" . CUSTOM_LOCALE_DIR . "/$locale/$localeFilename"; */
-		$fileDirectories = Application::getFileDirectories();
-		$contextDir = $fileDirectories['context'];
-		$customLocalePath = "$publicFilesDir" . $contextDir . "$contextId/" . CUSTOM_LOCALE_DIR . "/$locale/$localeFilename";
+		$contextDir = PublicFileManager::getContextFilesPath(Application::getContextAssocType(), $contextId);
+		$customLocalePath = "$contextDir/" . CUSTOM_LOCALE_DIR . "/$locale/$localeFilename";
 		/* END UZH CHANGE OJS-71 */
 
 		import('lib.pkp.classes.file.FileManager');

@@ -75,11 +75,9 @@ class CustomLocaleGridHandler extends GridHandler {
 			/* UZH CHANGE OJS-71 2019/03/29/mb set path according to application name (OJS or OMP) */
 			/* $customFilesDir = Config::getVar('files', 'public_files_dir') .
 				"/presses/$contextId/" . CUSTOM_LOCALE_DIR . "/$locale"; */
-			$publicFilesDir = Config::getVar('files', 'public_files_dir');
-			$fileDirectories = Application::getFileDirectories();
-			$contextDir = $fileDirectories['context'];
-			$customFilePath = "$publicFilesDir" . $contextDir . "$contextId/" . 
-				CUSTOM_LOCALE_DIR . "/$locale/$filename";
+			/* $customFilePath = "$customFilesDir/$filename"; */
+			$contextDir = PublicFileManager::getContextFilesPath(Application::getContextAssocType(), $contextId);
+			$customFilePath = "$contextDir/" . CUSTOM_LOCALE_DIR . "/$locale/$filename";
 			/* END UZH CHANGE OJS-71 */
 
 			// Create empty custom locale file if it doesn't exist
