@@ -1,2 +1,88 @@
 msgid ""
-msgstr "X-Generator: Weblate\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit"
+msgstr ""
+"PO-Revision-Date: 2020-06-15 05:39+0000\n"
+"Last-Translator: M. Ali <vorteem@gmail.com>\n"
+"Language-Team: Arabic <http://translate.pkp.sfu.ca/projects/plugins/"
+"customLocale/ar_IQ/>\n"
+"Language: ar_IQ\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 3.9.1\n"
+
+msgid "plugins.generic.customLocale.searchResultsCount"
+msgstr ""
+"عرض {{ currentLocaleKeys.length }} من أصل {{ filteredKeysList.length }} "
+"نتيجة لعبارة البحث \"{{ phraseSearched }}.\""
+
+msgid "plugins.generic.customLocale.fileDescription"
+msgstr ""
+"أدخل نصاً في الحقل المقابل ليكون بمثابة النص المخصص. أغفل إدخال النص إن كنت "
+"تريد استعمال النص الافتراضي لنظام OMP."
+
+msgid "plugins.generic.customLocale.searchDescription"
+msgstr "أدخل المفتاح الكامل للغة هنا. المفاتيح الموجودة سلفاً، مبرزة."
+
+msgid "plugins.generic.customLocale.customLocaleFiles"
+msgstr "ملفات اللغة"
+
+msgid "plugins.generic.customLocale.files.pageTitle"
+msgstr "اسم الملف"
+
+msgid "plugins.generic.customLocale.customLocale"
+msgstr "اللغات"
+
+msgid "plugins.generic.customLocale.file.custom"
+msgstr "النص المخصص"
+
+msgid "plugins.generic.customLocale.file.reference"
+msgstr "النص الافتراضي"
+
+msgid "plugins.generic.customLocale.file.edit"
+msgstr "تعديل {$filename}"
+
+msgid "plugins.generic.customLocale.file.editHeader"
+msgstr "تخصيص مفاتيح اللغة"
+
+msgid "grid.action.printChanges"
+msgstr "تنزيل ملف يحتوي على كل التخصيصات التي قمت بها."
+
+msgid "plugins.generic.customLocale.customize"
+msgstr "التخصيص"
+
+msgid "plugins.generic.customLocale.localeKeyValue"
+msgstr "القيمة"
+
+msgid "plugins.generic.customLocale.localeKey"
+msgstr "المفتاح"
+
+msgid "plugins.generic.customLocale.path"
+msgstr "الإجراء"
+
+msgid "plugins.generic.customLocale.localeKey.description"
+msgstr "أدخل المفتاح الكامل للغة التي تريد البحث عنها."
+
+msgid "plugins.generic.customLocale.printChanges"
+msgstr "تنزيل أدبيات النظام"
+
+msgid "plugins.generic.customLocale.noneCreated"
+msgstr "تعذر العثور على أي ملفات."
+
+msgid "plugins.generic.customLocale.saveAndContinue"
+msgstr "إحفظ واستمر"
+
+msgid "plugins.generic.customLocale.search.key"
+msgstr "البحث عن مفتاح"
+
+msgid "plugins.generic.customLocale.search.fileName"
+msgstr "البحث في أسماء الملفات"
+
+msgid "plugins.generic.customLocale.description"
+msgstr ""
+"هذه الإضافة تسمح بتخصيص نصوص لغة واجهة المستخدم الافتراضية المستعملة في نظام "
+"OMP."
+
+msgid "plugins.generic.customLocale.name"
+msgstr "إضافة اللغة المخصصة"
