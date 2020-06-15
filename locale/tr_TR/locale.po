@@ -1,2 +1,87 @@
 msgid ""
-msgstr "X-Generator: Weblate\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit"
+msgstr ""
+"PO-Revision-Date: 2020-06-16 08:39+0000\n"
+"Last-Translator: Hüseyin Körpeoğlu <yoruyenturk@hotmail.com>\n"
+"Language-Team: Turkish <http://translate.pkp.sfu.ca/projects/plugins/"
+"customLocale/tr_TR/>\n"
+"Language: tr_TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.9.1\n"
+
+msgid "plugins.generic.customLocale.searchResultsCount"
+msgstr ""
+"\"{{ phraseSearched }}\" için  {{ filteredKeysList.length }} sonuçtan {{ "
+"currentLocaleKeys.length }} gösteriliyor."
+
+msgid "plugins.generic.customLocale.fileDescription"
+msgstr ""
+"İlgili özel metin alanına metin girin. Varsayılan OMP metninin "
+"kullanılmasını istiyorsanız özel metin alanını boş bırakın."
+
+msgid "plugins.generic.customLocale.searchDescription"
+msgstr "Tam bir Key girin. Key'ler bulunduğunda vurgulanacaktır."
+
+msgid "plugins.generic.customLocale.customLocaleFiles"
+msgstr "Dil dosyaları"
+
+msgid "plugins.generic.customLocale.files.pageTitle"
+msgstr "Dosya adı"
+
+msgid "plugins.generic.customLocale.customLocale"
+msgstr "Diller"
+
+msgid "plugins.generic.customLocale.file.custom"
+msgstr "Özel Metin"
+
+msgid "plugins.generic.customLocale.file.reference"
+msgstr "Varsayılan Metin"
+
+msgid "plugins.generic.customLocale.file.edit"
+msgstr "{$filename} düzenle"
+
+msgid "plugins.generic.customLocale.file.editHeader"
+msgstr "Dil Key'ini özelleştir"
+
+msgid "grid.action.printChanges"
+msgstr "Yaptığınız tüm özelleştirmeleri listeleyen bir dosya indirin."
+
+msgid "plugins.generic.customLocale.customize"
+msgstr "Özelleştir"
+
+msgid "plugins.generic.customLocale.localeKeyValue"
+msgstr "Değer"
+
+msgid "plugins.generic.customLocale.localeKey"
+msgstr "Key"
+
+msgid "plugins.generic.customLocale.path"
+msgstr "Aksiyon"
+
+msgid "plugins.generic.customLocale.localeKey.description"
+msgstr "Aramak için KEY yazın."
+
+msgid "plugins.generic.customLocale.printChanges"
+msgstr "Dokümanları indir"
+
+msgid "plugins.generic.customLocale.noneCreated"
+msgstr "Dosya bulunamadı."
+
+msgid "plugins.generic.customLocale.saveAndContinue"
+msgstr "Kaydet ve devam et"
+
+msgid "plugins.generic.customLocale.search.key"
+msgstr "KEY ara"
+
+msgid "plugins.generic.customLocale.search.fileName"
+msgstr "Dosya adlarında ara"
+
+msgid "plugins.generic.customLocale.description"
+msgstr ""
+"Bu eklenti, OMP tarafından kullanılan varsayılan kullanıcı arayüzü "
+"çevirisinin özelleştirilmesini sağlar."
+
+msgid "plugins.generic.customLocale.name"
+msgstr "Özel Dil Eklentisi"
