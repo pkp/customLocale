@@ -1,2 +1,92 @@
 msgid ""
-msgstr "X-Generator: Weblate\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit"
+msgstr ""
+"PO-Revision-Date: 2020-06-17 20:29+0000\n"
+"Last-Translator: Jordi LC <jordi.lacruz@uab.cat>\n"
+"Language-Team: Catalan <http://translate.pkp.sfu.ca/projects/plugins/"
+"customLocale/ca_ES/>\n"
+"Language: ca_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.9.1\n"
+
+msgid "plugins.generic.customLocale.searchResultsCount"
+msgstr ""
+"Mostrant {{ currentLocaleKeys.length }} de {{ filteredKeysList.length }} "
+"resultats per a \"{{ phraseSearched }}.\""
+
+msgid "plugins.generic.customLocale.fileDescription"
+msgstr ""
+"Introduïu el text en el camp de text personalitzat corresponent. Deixeu el "
+"camp de text personalitzat en blanc si voleu utilitzar el text predeterminat "
+"d'OMP."
+
+msgid "plugins.generic.customLocale.searchDescription"
+msgstr ""
+"Introduïu aquí una clau de configuració regional completa. Les claus "
+"trobades estan ressaltades."
+
+msgid "plugins.generic.customLocale.customLocaleFiles"
+msgstr "Arxius de configuració regionals"
+
+msgid "plugins.generic.customLocale.files.pageTitle"
+msgstr "Nom d'arxiu"
+
+msgid "plugins.generic.customLocale.customLocale"
+msgstr "Configuracions regionals"
+
+msgid "plugins.generic.customLocale.file.custom"
+msgstr "Text personalitzat"
+
+msgid "plugins.generic.customLocale.file.reference"
+msgstr "Text predeterminat"
+
+msgid "plugins.generic.customLocale.file.edit"
+msgstr "Editant {$filename}"
+
+msgid "plugins.generic.customLocale.file.editHeader"
+msgstr "Personalitzar les claus de configuració regional"
+
+msgid "grid.action.printChanges"
+msgstr ""
+"Descarregueu un arxiu amb el llistat de totes les personalitzacions que heu "
+"fet."
+
+msgid "plugins.generic.customLocale.customize"
+msgstr "Personalitzar"
+
+msgid "plugins.generic.customLocale.localeKeyValue"
+msgstr "Valor"
+
+msgid "plugins.generic.customLocale.localeKey"
+msgstr "Clave"
+
+msgid "plugins.generic.customLocale.path"
+msgstr "Acció"
+
+msgid "plugins.generic.customLocale.localeKey.description"
+msgstr "Introduïu la clau de configuració regional completa que voleu cercar."
+
+msgid "plugins.generic.customLocale.printChanges"
+msgstr "Descarregar documentació"
+
+msgid "plugins.generic.customLocale.noneCreated"
+msgstr "No s'ha trobat cap arxiu."
+
+msgid "plugins.generic.customLocale.saveAndContinue"
+msgstr "Guardar i continuar"
+
+msgid "plugins.generic.customLocale.search.key"
+msgstr "Cercar per clau"
+
+msgid "plugins.generic.customLocale.search.fileName"
+msgstr "Cercar en els noms d'arxiu"
+
+msgid "plugins.generic.customLocale.description"
+msgstr ""
+"Aquest mòdul permet la personalització del text de la interfície d'usuari/"
+"ària predeterminat que fa servir OMP."
+
+msgid "plugins.generic.customLocale.name"
+msgstr "Mòdul de configuració regional personalitzada"
