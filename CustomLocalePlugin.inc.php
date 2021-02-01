@@ -27,7 +27,10 @@ class CustomLocalePlugin extends GenericPlugin {
 
 			$request = Application::get()->getRequest();
 			$context = $request->getContext();
-
+			if ($context == NULL ) {
+				// No context abort registration
+				return false;
+			}
 			import('lib.pkp.classes.file.ContextFileManager');
 			$contextFileManager = new ContextFileManager($context->getId());
 			$customLocalePathBase = $contextFileManager->getBasePath() . "customLocale/$locale/";
