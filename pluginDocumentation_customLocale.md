@@ -12,7 +12,7 @@ Key data
 Description
 ============
 
-This plugin allows to customize locales via the OMP GUI. The default locales are replaced but not overwritten and can easiliy be restored. A simple documentation can be printed that lists all changes made to the locales. The locales can be customized in the tab 'locale' in management > settings > website. There is a search function for files and for locale keys within the files. The documentation can be printed in the plugin's settings section.
+This plugin allows to customize locales via the OMP GUI. The default locales are replaced but not overwritten and can easily be restored. A simple documentation can be printed that lists all changes made to the locales. The locales can be customized in the tab 'locale' in management > settings > website. There is a search function for files and for locale keys within the files. The documentation can be printed in the plugin's settings section.
 
  
 Implementation
