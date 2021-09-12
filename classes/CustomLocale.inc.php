@@ -3,74 +3,33 @@
 /**
  * @file classes/CustomLocale.inc.php
  *
- * Copyright (c) 2016-2020 Language Science Press
- * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+ * Copyright (c) 2016-2021 Language Science Press
+ * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class CustomLocale
  */
 
-class CustomLocale extends DataObject {
-	//
-	// Get/set methods
-	//
-	function getKey() {
-		return $this->getData('key');
-	}
+use PKP\core\DataObject;
 
-	function setKey($key) {
-		$this->setData('key', $key);
-	}
+class CustomLocale extends DataObject
+{
+    public function getLocale(): string
+    {
+        return $this->getData('locale');
+    }
 
-	function getLocale() {
-		return $this->getData('locale');
-	}
+    public function setLocale($locale): void
+    {
+        $this->setData('locale', $locale);
+    }
 
-	function setLocale($locale) {
-		$this->setData('locale', $locale);
-	}
+    public function getFilePath(): string
+    {
+        return $this->getData('filepath');
+    }
 
-	function getContextId() {
-		return $this->getData('contextId');
-	}
-
-	function setContextId($contextId) {
-		$this->setData('contextId', $contextId);
-	}
-
-	function setFileTitle($title) {
-		$this->setData('filetitle', $title);
-	}
-
-	function getFileTitle() {
-		return $this->getData('filetitle');
-	}
-
-	function setTitle($title, $locale) {
-		$this->setData('title', $title, $locale);
-	}
-
-	function getTitle($locale) {
-		return $this->getData('title', $locale);
-	}
-
-	function getLocalizedTitle() {
-		return $this->getLocalizedData('title');
-	}
-
-	function getPath() {
-		return $this->getData('path');
-	}
-
-	function setPath($path) {
-		$this->setData('path', $path);
-	}
-
-	function getFilePath() {
-		return $this->getData('filepath');
-	}
-
-	function setFilePath($filepath) {
-		$this->setData('filepath', $filepath);
-	}
+    public function setFilePath($filepath): void
+    {
+        $this->setData('filepath', $filepath);
+    }
 }
-

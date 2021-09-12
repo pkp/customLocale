@@ -1,8 +1,8 @@
 {**
  * templates/localeFile.tpl
  *
- * Copyright (c) 2016-2020 Language Science Press
- * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+ * Copyright (c) 2016-2021 Language Science Press
+ * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  *}
 
@@ -168,7 +168,7 @@
 		{else}
 			customLocalesApp.data.edited = {ldelim}{rdelim};
 		{/if}
-		customLocalesApp.data.localeKeysMaster = {$referenceLocaleContentsArray|json_encode};
+		customLocalesApp.data.localeKeysMaster = {$referenceLocaleContents|json_encode};
 		new pkp.Vue(customLocalesApp);
 	</script>
 </form>

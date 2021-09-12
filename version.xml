@@ -4,16 +4,16 @@
 <!--
  * version.xml
  *
- * Copyright (c) 2016-2020 Language Science Press
- * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+ * Copyright (c) 2016-2021 Language Science Press
+ * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * Plugin version information.
  -->
 <version>
 	<application>customLocale</application>
 	<type>plugins.generic</type>
-	<release>1.1.0.1</release>
-	<date>2020-06-19</date>
+	<release>1.1.0.2</release>
+	<date>2021-09-01</date>
 	<lazy-load>1</lazy-load>
 	<class>CustomLocalePlugin</class>
 </version>

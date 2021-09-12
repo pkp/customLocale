@@ -1,72 +1,78 @@
 <?php
 
+use APP\template\TemplateManager;
+use PKP\file\ContextFileManager;
+use PKP\form\Form;
+use PKP\i18n\translation\LocaleFile;
+
 /**
  * @file controllers/grid/form/LocaleFileForm.inc.php
  *
- * Copyright (c) 2016-2020 Language Science Press
- * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+ * Copyright (c) 2016-2021 Language Science Press
+ * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class LocaleFileForm
  */
 
-import('lib.pkp.classes.form.Form');
+class LocaleFileForm extends Form
+{
+    /** @var string $filePath */
+    protected $filePath;
 
-class LocaleFileForm extends Form {
-	/** @var $filePath string */
-	var $filePath;
+    /** @var string $locale */
+    protected $locale;
 
-	/** @var $locale string */
-	var $locale;
+    /** @var CustomLocalePlugin Custom locale plugin */
+    protected $plugin;
 
-	/** Custom locale plugin */
-	var $plugin;
+    /**
+     * Constructor
+     */
+    public function __construct(CustomLocalePlugin $customLocalePlugin, string $filePath, string $locale)
+    {
+        parent::__construct($customLocalePlugin->getTemplateResource('localeFile.tpl'));
+        $this->plugin = $customLocalePlugin;
+        $this->filePath = $filePath;
+        $this->locale = $locale;
+    }
 
-	/**
-	 * Constructor
-	 * @param $customLocalePlugin object
-	 * @param $filePath string
-	 * @param $locale string
-	 */
-	function __construct($customLocalePlugin, $filePath, $locale) {
-		parent::__construct($customLocalePlugin->getTemplateResource('localeFile.tpl'));
-		$this->plugin = $customLocalePlugin;
-		$this->filePath = $filePath;
-		$this->locale = $locale;
-	}
+    /**
+     * @copydoc Form::fetch
+     *
+     * @param null|mixed $template
+     */
+    public function fetch($request, $template = null, $display = false): string
+    {
+        $file = '/' . ltrim($this->filePath, '/');
+        $locale = $this->locale;
+        if (!CustomLocaleAction::isLocaleFile($locale, BASE_SYS_DIR . $file)) {
+            throw new Exception("${file} is not a locale file");
+        }
 
-	/**
-	 * @copydoc Form::fetch
-	 */
-	function fetch($request, $template = null, $display = false) {
-		$file = $this->filePath;
-		$locale = $this->locale;
-		if (!CustomLocaleAction::isLocaleFile($locale, $file)) throw new Exception("$file is not a locale file!");
+        $contextFileManager = new ContextFileManager($request->getContext()->getId());
+        $customLocalePath = $contextFileManager->getBasePath() . CustomLocalePlugin::LOCALE_FOLDER . "/${locale}" . $file;
 
-		$contextFileManager = new ContextFileManager($request->getContext()->getId());
-		$customLocalePath = $contextFileManager->getBasePath() . "customLocale/$locale/$file";
+        $localeContents = null;
+        if ($contextFileManager->fileExists($customLocalePath)) {
+            $localeContents = reset(LocaleFile::loadArray($customLocalePath)['messages']);
+        }
+        $referenceLocale = LocaleFile::loadArray(BASE_SYS_DIR . $file);
+        $referenceLocaleContents = [];
+        foreach (reset($referenceLocale['messages']) as $key => $value) {
+            $referenceLocaleContents[] = [
+                'localeKey' => $key,
+                'value' => $value,
+            ];
+        }
 
-		import('lib.pkp.classes.i18n.LocaleFile');
-		if ($contextFileManager->fileExists($customLocalePath)) $localeContents = LocaleFile::load($customLocalePath);
-		else $localeContents = null;
-		$referenceLocaleContents = LocaleFile::load($file);
-		$referenceLocaleContentsArray = [];
-		foreach ($referenceLocaleContents as $key => $value) {
-			$referenceLocaleContentsArray[] = [
-				'localeKey' => $key,
-				'value' => $value,
-			];
-		}
+        $templateMgr = TemplateManager::getManager($request);
+        $templateMgr->assign([
+            'filePath' => $this->filePath,
+            'localeContents' => $localeContents,
+            'locale' => $locale,
+            'referenceLocaleContents' => $referenceLocaleContents,
+        ]);
 
-		import('lib.pkp.classes.core.ArrayItemIterator');
-		$templateMgr = TemplateManager::getManager($request);
-		$templateMgr->assign(array(
-			'filePath' => $this->filePath,
-			'localeContents' => $localeContents,
-			'locale' => $locale,
-			'referenceLocaleContentsArray' => $referenceLocaleContentsArray,
-		));
-
-		return parent::fetch($request, $template, $display);
-	}
+        return parent::fetch($request, $template, $display);
+    }
 }
-

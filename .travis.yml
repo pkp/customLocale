@@ -19,7 +19,7 @@ env:
   - APPLICATION=omp BRANCH=main TEST=pgsql
 
 install:
-  # Prepare OJS/OMP environment
+  # Prepare OJS/OMP/OPS environment
   - git clone -b ${BRANCH} https://github.com/pkp/${APPLICATION} ~/${APPLICATION}
   - cd ~/${APPLICATION}
   - git submodule update --init --recursive
@@ -29,7 +29,7 @@ install:
   - lib/pkp/tools/travis/install-composer-dependencies.sh
   - npm i g -npm && npm install --silent && npm run build
   - ln -s ${TRAVIS_BUILD_DIR} ~/${APPLICATION}/plugins/generic/customLocale
-  # Install OJS/OMP & prep data environment
+  # Install OJS/OMP/OPS & prep data environment
   - $(npm bin)/cypress run --spec "cypress/tests/data/10-Installation.spec.js,cypress/tests/data/20-CreateContext.spec.js"
 
 script:
