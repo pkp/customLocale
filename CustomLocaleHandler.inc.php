@@ -20,7 +20,7 @@ class CustomLocaleHandler extends Handler {
 	function printCustomLocaleChanges($args, $request) {
 		$context = $request->getContext();
 
-		$contextFileManager = new ContextFileManager($context->getId());
+		$contextFileManager = new ContextFileManager($context ? $context->getId() : CONTEXT_SITE);
 		$customLocaleDir = $contextFileManager->getBasePath() . 'customLocale';
 		if (!file_exists($customLocaleDir) || !is_dir($customLocaleDir)) throw new Exception("Path \"$customLocaleDir\" does not exist!");
 

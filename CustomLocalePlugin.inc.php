@@ -29,7 +29,7 @@ class CustomLocalePlugin extends GenericPlugin {
 			$context = $request->getContext();
 
 			import('lib.pkp.classes.file.ContextFileManager');
-			$contextFileManager = new ContextFileManager($context->getId());
+			$contextFileManager = new ContextFileManager($context ? $context->getId() : CONTEXT_SITE);
 			$customLocalePathBase = $contextFileManager->getBasePath() . "customLocale/$locale/";
 
 			import('lib.pkp.classes.file.FileManager');
@@ -144,7 +144,7 @@ class CustomLocalePlugin extends GenericPlugin {
 		$request =& Registry::get('request');
 		$context = $request->getContext();
 
-		$contextFileManager = new ContextFileManager($context->getId());
+		$contextFileManager = new ContextFileManager($context ? $context->getId() : CONTEXT_SITE);
 		$customLocalePath = $contextFileManager->getBasePath() . "customLocale/$locale/$localeFilename";
 
 		if ($contextFileManager->fileExists($customLocalePath)) {

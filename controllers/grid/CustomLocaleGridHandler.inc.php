@@ -58,7 +58,7 @@ class CustomLocaleGridHandler extends GridHandler {
 	 */
 	function updateLocale($args, $request) {
 		$context = $request->getContext();
-		$contextId = $context->getId();
+		$contextId = $context ? $context->getId() : CONTEXT_SITE;
 		$locale = $args['locale'];
 		$filename = $args['key'];
 
@@ -66,7 +66,7 @@ class CustomLocaleGridHandler extends GridHandler {
 		$changes = (array) $args['changes'];
 		if (!empty($changes)) {
 			import('lib.pkp.classes.file.ContextFileManager');
-			$contextFileManager = new ContextFileManager($context->getId());
+			$contextFileManager = new ContextFileManager($context ? $context->getId() : CONTEXT_SITE);
 			$customFilesDir = $contextFileManager->getBasePath() . "customLocale/$locale/";
 			$customFilePath = "$customFilesDir/$filename";
 
