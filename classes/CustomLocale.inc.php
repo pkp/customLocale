@@ -18,7 +18,7 @@ class CustomLocale extends DataObject
         return $this->getData('locale');
     }
 
-    public function setLocale($locale): void
+    public function setLocale(string $locale): void
     {
         $this->setData('locale', $locale);
     }
@@ -28,7 +28,7 @@ class CustomLocale extends DataObject
         return $this->getData('filepath');
     }
 
-    public function setFilePath($filepath): void
+    public function setFilePath(string $filepath): void
     {
         $this->setData('filepath', $filepath);
     }

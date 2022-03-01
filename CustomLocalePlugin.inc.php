@@ -32,7 +32,7 @@ class CustomLocalePlugin extends GenericPlugin
     public function register($category, $path, $mainContextId = null): bool
     {
         $success = parent::register($category, $path, $mainContextId);
-        if (!$success || !Application::isInstalled() || Application::isUpgrading()) {
+        if (!$success || Application::isUnderMaintenance()) {
             return $success;
         }
 
@@ -47,7 +47,7 @@ class CustomLocalePlugin extends GenericPlugin
                 $contextFileManager->mkdir($customLocalePath);
             }
 
-            Locale::registerFolder($customLocalePath, PHP_INT_MAX);
+            Locale::registerPath($customLocalePath, PHP_INT_MAX);
 
             $this->setupGridHandler();
             $this->callbackShowWebsiteSettingsTabs();
@@ -88,13 +88,11 @@ class CustomLocalePlugin extends GenericPlugin
     {
         HookRegistry::register('LoadHandler', function (string $hookName, array $args): bool {
             $request = $this->getRequest();
-
-            // get url path components
-            $page = & $args[0];
-            $op = & $args[1];
+            // Get url path components by reference
+            [&$page, &$op] = $args;
             $tail = implode('/', $request->getRequestedArgs());
 
-            if ([$page, $op, $tail] == ['management', 'settings', 'printCustomLocaleChanges']) {
+            if ([$page, $op, $tail] === ['management', 'settings', 'printCustomLocaleChanges']) {
                 $op = 'printCustomLocaleChanges';
                 $this->import('CustomLocaleHandler');
                 define('HANDLER_CLASS', CustomLocaleHandler::class);
@@ -109,11 +107,8 @@ class CustomLocalePlugin extends GenericPlugin
     public function callbackShowWebsiteSettingsTabs(): void
     {
         HookRegistry::register('Template::Settings::website', function (string $hookName, array $args): bool {
-            $templateMgr = $args[1];
-            $output = & $args[2];
-
+            [, $templateMgr, &$output] = $args;
             $output .= $templateMgr->fetch($this->getTemplateResource('customLocaleTab.tpl'));
-
             // Permit other plugins to continue interacting with this hook
             return false;
         });

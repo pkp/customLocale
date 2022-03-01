@@ -10,7 +10,9 @@
  */
 
 use APP\handler\Handler;
+use Gettext\Translation;
 use PKP\core\PKPRequest;
+use PKP\facades\Locale;
 use PKP\file\ContextFileManager;
 use PKP\i18n\translation\LocaleFile;
 
@@ -24,64 +26,44 @@ class CustomLocaleHandler extends Handler
         $context = $request->getContext();
 
         $contextFileManager = new ContextFileManager($context->getId());
-        $customLocaleDir = $contextFileManager->getBasePath() . CustomLocalePlugin::LOCALE_FOLDER;
-        if (!$contextFileManager->fileExists($customLocaleDir, 'dir')) {
-            throw new Exception("Path \"${customLocaleDir}\" does not exist");
+        $customLocalePath = realpath($contextFileManager->getBasePath() . CustomLocalePlugin::LOCALE_FOLDER);
+        if (!$contextFileManager->fileExists($customLocalePath, 'dir')) {
+            throw new Exception("Path \"${customLocalePath}\" does not exist");
         }
 
-        // get all po-files in the custom locale directory
-        $directory = new RecursiveDirectoryIterator($customLocaleDir);
+        // Get all po-files in the custom locale directory
+        $directory = new RecursiveDirectoryIterator($customLocalePath);
         $iterator = new RecursiveIteratorIterator($directory);
         $regex = new RegexIterator($iterator, '/^.+\.po$/i', RecursiveRegexIterator::GET_MATCH);
-        $files = iterator_to_array($regex);
-        $fileKeys = array_keys($files);
-
-        $output = '';
-
-        // iterate through all customized files
-        foreach ($fileKeys as $pathToFile) {
-            $posLib = strpos($pathToFile, 'lib');
-            $posLocale = strpos($pathToFile, 'locale');
-            $posPlugins = strpos($pathToFile, 'plugins');
-
-            $localeFile = '';
-            if ($posLib !== false) {
-                $localeFile = substr($pathToFile, $posLib);
-            } elseif ($posPlugins !== false) {
-                $localeFile = substr($pathToFile, $posPlugins);
-            } else {
-                $localeFile = substr($pathToFile, $posLocale);
-            }
-
-            $localeContentsCustomized = null;
-            if ($contextFileManager->fileExists($pathToFile)) {
-                $localeContentsCustomized = LocaleFile::loadArray($pathToFile);
-            }
-
-            $localeContents = null;
-            if ($contextFileManager->fileExists($localeFile)) {
-                $localeContents = LocaleFile::load($localeFile);
-            }
-
-            $localeKeys = array_keys($localeContentsCustomized);
-
-            if (count($localeKeys)) {
-                $output = $output . "\nFile: " . $localeFile;
-            }
-
-            foreach ($localeKeys as $index => $localeKey) {
-                $output = $output . "\n\n" . ($index + 1) . '. locale key: ' . $localeKey;
-                $output = $output . "\n\n	original content:   " . $localeContents[$localeKey];
-                $output = $output . "\n	customized content: " . $localeContentsCustomized[$localeKey];
-            }
-            if (!empty($localeKeys)) {
-                $output = $output . "\n\n__________________________________________________________________________________\n\n";
-            }
-        }
+        $files = array_keys(iterator_to_array($regex));
 
         header('Content-Type: text/plain');
-        header('Content-Disposition: attachment; filename="customLocale-changes.txt"');
-        header('Content-Length: ' . strlen($output));
-        echo $output;
+        header('Content-Disposition: attachment; filename="customLocale.txt"');
+
+        // iterate through all customized files
+        foreach ($files as $localeFile) {
+            /** @var Translation[] */
+            $customTranslations = LocaleFile::loadTranslations($localeFile)->getTranslations();
+            if (!count($customTranslations)) {
+                continue;
+            }
+
+            $locale = explode('/', substr($localeFile, strlen($customLocalePath) + 1))[0];
+            $bundle = Locale::getBundle($locale);
+            $entries = $bundle->getEntries();
+            // Remove custom locale entries from the bundle in order to retrieve the original translation
+            $entries = array_filter($entries, fn (string $path) => !str_starts_with($path, $customLocalePath), ARRAY_FILTER_USE_KEY);
+            $bundle->setEntries($entries);
+            $translator = $bundle->getTranslator();
+            $sanitizedPath = str_replace($customLocalePath, '', $localeFile);
+            echo "File: ${sanitizedPath}\n";
+            echo "Locale: ${locale}\n\n";
+            foreach ($customTranslations as $translation) {
+                $localeKey = $translation->getOriginal();
+                echo "Locale key: ${localeKey}";
+                echo "\nOriginal: {$translator->getSingular($localeKey)}";
+                echo "\nCustomized: {$translation->getTranslation()}\n\n";
+            }
+        }
     }
 }
