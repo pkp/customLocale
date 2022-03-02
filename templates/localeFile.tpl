@@ -1,7 +1,7 @@
 {**
  * templates/localeFile.tpl
  *
- * Copyright (c) 2016-2021 Language Science Press
+ * Copyright (c) 2016-2022 Language Science Press
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  *}

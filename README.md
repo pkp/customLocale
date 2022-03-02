@@ -13,7 +13,7 @@ files. The documentation can be printed in the plugin's settings section.
 
 ## License
 
-Copyright (c) 2016-2021 Language Science Press
+Copyright (c) 2016-2022 Language Science Press
 
 This plugin is licensed under the GNU General Public License v3.
 

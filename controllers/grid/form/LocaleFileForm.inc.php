@@ -8,7 +8,7 @@ use PKP\i18n\translation\LocaleFile;
 /**
  * @file controllers/grid/form/LocaleFileForm.inc.php
  *
- * Copyright (c) 2016-2021 Language Science Press
+ * Copyright (c) 2016-2022 Language Science Press
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class LocaleFileForm
