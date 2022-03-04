@@ -13,23 +13,45 @@ use PKP\core\DataObject;
 
 class CustomLocale extends DataObject
 {
+    /**
+     * Constructor
+     */
+    public function __construct(int $id, string $locale, string $name)
+    {
+        $this->setId($id);
+        $this->setLocale($locale);
+        $this->setName($name);
+    }
+
+    /**
+     * Get locale
+     */
     public function getLocale(): string
     {
         return $this->getData('locale');
     }
 
+    /**
+     * Set locale
+     */
     public function setLocale(string $locale): void
     {
         $this->setData('locale', $locale);
     }
 
-    public function getFilePath(): string
+    /**
+     * Get name
+     */
+    public function getName(): string
     {
-        return $this->getData('filepath');
+        return $this->getData('name');
     }
 
-    public function setFilePath(string $filepath): void
+    /**
+     * Set name
+     */
+    public function setName(string $name): void
     {
-        $this->setData('filepath', $filepath);
+        $this->setData('name', $name);
     }
 }

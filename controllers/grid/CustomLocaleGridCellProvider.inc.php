@@ -28,22 +28,22 @@ class CustomLocaleGridCellProvider extends GridCellProvider
      */
     public function getCellActions($request, $row, $column, $position = GridHandler::GRID_ACTION_POSITION_DEFAULT): array
     {
+        /** @var CustomLocale */
         $customLocale = $row->getData();
-        if ($column->getId() === 'filepath') {
-            $router = $request->getRouter();
-            return [new LinkAction(
+        return match ($column->getId()) {
+            'action' => [new LinkAction(
                 'edit',
                 new AjaxModal(
-                    $router->url($request, null, null, 'editLocaleFile', null, ['locale' => $customLocale->getLocale(), 'filePath' => $customLocale->getFilePath()]),
+                    $request->getRouter()->url($request, null, null, 'editLocale', null, ['locale' => $customLocale->getLocale()]),
                     __('grid.action.edit'),
                     'modal_edit',
                     true
                 ),
                 __('common.edit'),
                 null
-            )];
-        }
-        return parent::getCellActions($request, $row, $column, $position);
+            )],
+            default => parent::getCellActions($request, $row, $column, $position)
+        };
     }
 
     /**
@@ -58,13 +58,11 @@ class CustomLocaleGridCellProvider extends GridCellProvider
         /** @var CustomLocale */
         $customLocale = $row->getData();
 
-        switch ($column->getId()) {
-            case 'filepath':
-                // The action has the label
-                return ['label' => ''];
-            case 'filetitle':
-                return ['label' => $customLocale->getFilePath()];
-        }
-        return parent::getTemplateVarsFromRowColumn($row, $column);
+        return match ($column->getId()) {
+            'locale' => ['label' => $customLocale->getLocale()],
+            'name' => ['label' => $customLocale->getName()],
+            'action' => ['label' => ''],
+            default => parent::getTemplateVarsFromRowColumn($row, $column)
+        };
     }
 }
