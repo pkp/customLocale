@@ -12,8 +12,6 @@
 use APP\handler\Handler;
 use Gettext\Translation;
 use PKP\core\PKPRequest;
-use PKP\facades\Locale;
-use PKP\file\ContextFileManager;
 use PKP\i18n\translation\LocaleFile;
 
 class CustomLocaleHandler extends Handler
@@ -23,13 +21,7 @@ class CustomLocaleHandler extends Handler
      */
     public function printCustomLocaleChanges(array $args, PKPRequest $request): void
     {
-        $context = $request->getContext();
-
-        $contextFileManager = new ContextFileManager($context->getId());
-        $customLocalePath = realpath($contextFileManager->getBasePath() . CustomLocalePlugin::LOCALE_FOLDER);
-        if (!$contextFileManager->fileExists($customLocalePath, 'dir')) {
-            throw new Exception("Path \"${customLocalePath}\" does not exist");
-        }
+        $customLocalePath = CustomLocalePlugin::getStoragePath();
 
         // Get all po-files in the custom locale directory
         $directory = new RecursiveDirectoryIterator($customLocalePath);
@@ -38,7 +30,7 @@ class CustomLocaleHandler extends Handler
         $files = array_keys(iterator_to_array($regex));
 
         header('Content-Type: text/plain');
-        header('Content-Disposition: attachment; filename="customLocale.txt"');
+        header('Content-Disposition: attachment; filename="custom-locale.txt"');
 
         // iterate through all customized files
         foreach ($files as $localeFile) {
@@ -49,20 +41,13 @@ class CustomLocaleHandler extends Handler
             }
 
             $locale = explode('/', substr($localeFile, strlen($customLocalePath) + 1))[0];
-            $bundle = Locale::getBundle($locale);
-            $entries = $bundle->getEntries();
-            // Remove custom locale entries from the bundle in order to retrieve the original translation
-            $entries = array_filter($entries, fn (string $path) => !str_starts_with($path, $customLocalePath), ARRAY_FILTER_USE_KEY);
-            $bundle->setEntries($entries);
-            $translator = $bundle->getTranslator();
-            $sanitizedPath = str_replace($customLocalePath, '', $localeFile);
-            echo "File: ${sanitizedPath}\n";
-            echo "Locale: ${locale}\n\n";
+            $translator = CustomLocalePlugin::getTranslator($locale);
+            echo "${locale}\n\n";
             foreach ($customTranslations as $translation) {
                 $localeKey = $translation->getOriginal();
-                echo "Locale key: ${localeKey}";
-                echo "\nOriginal: {$translator->getSingular($localeKey)}";
-                echo "\nCustomized: {$translation->getTranslation()}\n\n";
+                echo __('common.id') . ": ${localeKey}"
+                    . "\n" . __('plugins.generic.customLocale.file.reference') . ": {$translator->getSingular($localeKey)}"
+                    . "\n" . __('plugins.generic.customLocale.file.custom') . ": {$translation->getTranslation()}\n\n";
             }
         }
     }

@@ -19,7 +19,9 @@ This plugin is licensed under the GNU General Public License v3.
 
 ## Upgrading From A Previous Version
 
-If upgrading from a version before OJS/OMP/OPS 3.3, please refer to the "Upgrading From A Previous Version" in the `stable-3_3_0` branch.
+- OJS/OMP/OPS 3.3: The plugin will take care of updating the locale files by itself once it's enabled.
+
+- OJS/OMP/OPS < 3.3: Please refer to the "Upgrading From A Previous Version" in the [`stable-3_3_0`](https://github.com/pkp/customLocale/tree/stable-3_3_0) branch.
 
 ## System Requirements
 
