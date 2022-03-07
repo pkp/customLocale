@@ -16,19 +16,8 @@ msgstr ""
 "Прикажување {{ currentLocaleKeys.length }} од {{ filteredKeysList.length }} "
 "резултати за  \"{{ phraseSearched }}\"."
 
-msgid "plugins.generic.customLocale.fileDescription"
-msgstr ""
-"Внеси текст во соодветното поле за избран текст. Остави го полето за избран "
-"текст празно доколку се користи предодреден текст од OJS/OMP."
-
-msgid "plugins.generic.customLocale.searchDescription"
-msgstr "Внеси тука комплетен локален клуч. Најдените клучеви се осветлени."
-
 msgid "plugins.generic.customLocale.customLocaleFiles"
 msgstr "Локализациски фајлови"
-
-msgid "plugins.generic.customLocale.files.pageTitle"
-msgstr "Име на фајлот"
 
 msgid "plugins.generic.customLocale.customLocale"
 msgstr "Локализации"
@@ -45,38 +34,17 @@ msgstr "Уредување {$filename}"
 msgid "plugins.generic.customLocale.file.editHeader"
 msgstr "Прилагоди локални клучеви"
 
-msgid "grid.action.printChanges"
+msgid "plugins.generic.customLocale.printChanges"
 msgstr "Симни фајл со листа од сите направени прилагодувања."
 
 msgid "plugins.generic.customLocale.customize"
 msgstr "Прилагоди"
-
-msgid "plugins.generic.customLocale.localeKeyValue"
-msgstr "Вредност"
-
-msgid "plugins.generic.customLocale.localeKey"
-msgstr "Клуч"
-
-msgid "plugins.generic.customLocale.path"
-msgstr "Акција"
-
-msgid "plugins.generic.customLocale.localeKey.description"
-msgstr "Внеси цел клучен збор за да пребаруваш."
-
-msgid "plugins.generic.customLocale.printChanges"
-msgstr "Симни документација"
 
 msgid "plugins.generic.customLocale.noneCreated"
 msgstr "Не се најдени фајлови."
 
 msgid "plugins.generic.customLocale.saveAndContinue"
 msgstr "Сними и продолжи"
-
-msgid "plugins.generic.customLocale.search.key"
-msgstr "Пребарување клучни зборови"
-
-msgid "plugins.generic.customLocale.search.fileName"
-msgstr "Пребарување имиња на фајлови"
 
 msgid "plugins.generic.customLocale.description"
 msgstr ""

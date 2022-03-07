@@ -11,25 +11,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 3.9.1\n"
 
-msgid "plugins.generic.customLocale.fileDescription"
-msgstr ""
-"Saisir le texte dans le champ de texte personnalisé correspondant. Laisser "
-"le champ de texte personnalisé vide si le texte par défaut de OJS/OMP doit "
-"être utilisé."
-
 msgid "plugins.generic.customLocale.searchResultsCount"
 msgstr ""
 "Affichage de {{ currentLocaleKeys.length }} des {{ filteredKeysList.length }}"
 " résultats pour \"{{ phraseSearched}}\"."
 
-msgid "plugins.generic.customLocale.searchDescription"
-msgstr "Saisir ici le nom complet d'une clé. Les clés trouvées sont surlignées."
-
 msgid "plugins.generic.customLocale.customLocaleFiles"
 msgstr "Fichiers personnalisables"
-
-msgid "plugins.generic.customLocale.files.pageTitle"
-msgstr "Nom du fichier"
 
 msgid "plugins.generic.customLocale.customLocale"
 msgstr "Personnalisations"
@@ -46,7 +34,7 @@ msgstr "Modification du fichier {$filename}"
 msgid "plugins.generic.customLocale.file.editHeader"
 msgstr "Personnaliser les clés de localisation"
 
-msgid "grid.action.printChanges"
+msgid "plugins.generic.customLocale.printChanges"
 msgstr ""
 "Téléchargez un fichier qui répertorie toutes les personnalisations que vous "
 "avez faites."
@@ -54,32 +42,11 @@ msgstr ""
 msgid "plugins.generic.customLocale.customize"
 msgstr "Personnaliser"
 
-msgid "plugins.generic.customLocale.localeKeyValue"
-msgstr "Valeur"
-
-msgid "plugins.generic.customLocale.localeKey"
-msgstr "Clé"
-
-msgid "plugins.generic.customLocale.path"
-msgstr "Action"
-
-msgid "plugins.generic.customLocale.localeKey.description"
-msgstr "Entrer le nom complet d'une clé à rechercher."
-
-msgid "plugins.generic.customLocale.printChanges"
-msgstr "Télécharger la documentation"
-
 msgid "plugins.generic.customLocale.noneCreated"
 msgstr "Aucun fichier trouvé."
 
 msgid "plugins.generic.customLocale.saveAndContinue"
 msgstr "Sauvegarder et continuer"
-
-msgid "plugins.generic.customLocale.search.key"
-msgstr "Rechercher une clé"
-
-msgid "plugins.generic.customLocale.search.fileName"
-msgstr "Rechercher parmi les noms de fichiers"
 
 msgid "plugins.generic.customLocale.description"
 msgstr ""

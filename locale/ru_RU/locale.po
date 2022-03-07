@@ -17,20 +17,8 @@ msgstr ""
 "Показаны {{ currentLocaleKeys.length }} из {{ filteredKeysList.length }} "
 "результатов для «{{ phraseSearched }}»."
 
-msgid "plugins.generic.customLocale.fileDescription"
-msgstr ""
-"Введите текст в соответствующее поле «Откорректированный текст».  Оставьте "
-"поле «Откорректированный текст» пустым, если хотите использовать текст по "
-"умолчанию из OJS/OMP."
-
-msgid "plugins.generic.customLocale.searchDescription"
-msgstr "Введите сюда полный ключ языка. Найденные ключи выделены цветом."
-
 msgid "plugins.generic.customLocale.customLocaleFiles"
 msgstr "Файлы языка"
-
-msgid "plugins.generic.customLocale.files.pageTitle"
-msgstr "Имя файла"
 
 msgid "plugins.generic.customLocale.customLocale"
 msgstr "Языки"
@@ -47,38 +35,17 @@ msgstr "Редактируем {$filename}"
 msgid "plugins.generic.customLocale.file.editHeader"
 msgstr "Корректировка ключей языка"
 
-msgid "grid.action.printChanges"
+msgid "plugins.generic.customLocale.printChanges"
 msgstr "Скачать файл со списком всех корректировок, которые Вы сделали."
 
 msgid "plugins.generic.customLocale.customize"
 msgstr "Корректировка"
-
-msgid "plugins.generic.customLocale.localeKeyValue"
-msgstr "Значение"
-
-msgid "plugins.generic.customLocale.localeKey"
-msgstr "Ключ"
-
-msgid "plugins.generic.customLocale.path"
-msgstr "Действие"
-
-msgid "plugins.generic.customLocale.localeKey.description"
-msgstr "Введите полностью ключ из языка для поиска."
-
-msgid "plugins.generic.customLocale.printChanges"
-msgstr "Скачать документацию"
 
 msgid "plugins.generic.customLocale.noneCreated"
 msgstr "Файлы не найдены."
 
 msgid "plugins.generic.customLocale.saveAndContinue"
 msgstr "Сохранить и продолжить"
-
-msgid "plugins.generic.customLocale.search.key"
-msgstr "Искать ключ"
-
-msgid "plugins.generic.customLocale.search.fileName"
-msgstr "Искать в именах файлов"
 
 msgid "plugins.generic.customLocale.description"
 msgstr ""

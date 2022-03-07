@@ -16,12 +16,6 @@ msgstr ""
 "Mostrant {{ currentLocaleKeys.length }} de {{ filteredKeysList.length }} "
 "resultats per a \"{{ phraseSearched }}\"."
 
-msgid "plugins.generic.customLocale.fileDescription"
-msgstr ""
-"Introduïu el text en el camp de text personalitzat corresponent. Deixeu el "
-"camp de text personalitzat en blanc si voleu utilitzar el text predeterminat "
-"d'OJS/OMP."
-
 msgid "plugins.generic.customLocale.searchDescription"
 msgstr ""
 "Introduïu aquí una clau de configuració regional completa. Les claus "
@@ -29,9 +23,6 @@ msgstr ""
 
 msgid "plugins.generic.customLocale.customLocaleFiles"
 msgstr "Arxius de configuració regionals"
-
-msgid "plugins.generic.customLocale.files.pageTitle"
-msgstr "Nom d'arxiu"
 
 msgid "plugins.generic.customLocale.customLocale"
 msgstr "Configuracions regionals"
@@ -48,7 +39,7 @@ msgstr "Editant {$filename}"
 msgid "plugins.generic.customLocale.file.editHeader"
 msgstr "Personalitzar les claus de configuració regional"
 
-msgid "grid.action.printChanges"
+msgid "plugins.generic.customLocale.printChanges"
 msgstr ""
 "Descarregueu un arxiu amb el llistat de totes les personalitzacions que heu "
 "fet."
@@ -56,32 +47,11 @@ msgstr ""
 msgid "plugins.generic.customLocale.customize"
 msgstr "Personalitzar"
 
-msgid "plugins.generic.customLocale.localeKeyValue"
-msgstr "Valor"
-
-msgid "plugins.generic.customLocale.localeKey"
-msgstr "Clave"
-
-msgid "plugins.generic.customLocale.path"
-msgstr "Acció"
-
-msgid "plugins.generic.customLocale.localeKey.description"
-msgstr "Introduïu la clau de configuració regional completa que voleu cercar."
-
-msgid "plugins.generic.customLocale.printChanges"
-msgstr "Descarregar documentació"
-
 msgid "plugins.generic.customLocale.noneCreated"
 msgstr "No s'ha trobat cap arxiu."
 
 msgid "plugins.generic.customLocale.saveAndContinue"
 msgstr "Guardar i continuar"
-
-msgid "plugins.generic.customLocale.search.key"
-msgstr "Cercar per clau"
-
-msgid "plugins.generic.customLocale.search.fileName"
-msgstr "Cercar en els noms d'arxiu"
 
 msgid "plugins.generic.customLocale.description"
 msgstr ""

@@ -21,12 +21,6 @@ msgstr ""
 "Exibindo {{ currentLocaleKeys.length }} de {{ filteredKeysList.length }} "
 "resultados para \"{{ phraseSearched }}\"."
 
-msgid "plugins.generic.customLocale.fileDescription"
-msgstr ""
-"Digite o texto no campo de texto personalizado correspondente. Deixe o campo "
-"de texto personalizado em branco caso o texto padrão do OJS/OMP deva ser "
-"usado."
-
 msgid "plugins.generic.customLocale.searchDescription"
 msgstr ""
 "Informe aqui uma chave completa de tradução. Chaves encontradas estão em "
@@ -34,9 +28,6 @@ msgstr ""
 
 msgid "plugins.generic.customLocale.customLocaleFiles"
 msgstr "Arquivos de tradução"
-
-msgid "plugins.generic.customLocale.files.pageTitle"
-msgstr "Nome do arquivo"
 
 msgid "plugins.generic.customLocale.customLocale"
 msgstr "Traduções"
@@ -53,38 +44,17 @@ msgstr "Editando {$filename}"
 msgid "plugins.generic.customLocale.file.editHeader"
 msgstr "Personalizar chaves de tradução"
 
-msgid "grid.action.printChanges"
+msgid "plugins.generic.customLocale.printChanges"
 msgstr "Baixar o arquivo que lista as personalizações realizadas."
 
 msgid "plugins.generic.customLocale.customize"
 msgstr "Personalizar"
-
-msgid "plugins.generic.customLocale.localeKeyValue"
-msgstr "Valor"
-
-msgid "plugins.generic.customLocale.localeKey"
-msgstr "Chave"
-
-msgid "plugins.generic.customLocale.path"
-msgstr "Ação"
-
-msgid "plugins.generic.customLocale.localeKey.description"
-msgstr "Informe uma chave de tradução completa para pesquisar."
-
-msgid "plugins.generic.customLocale.printChanges"
-msgstr "Baixar documentação"
 
 msgid "plugins.generic.customLocale.noneCreated"
 msgstr "Nenhum arquivo encontrado."
 
 msgid "plugins.generic.customLocale.saveAndContinue"
 msgstr "Salvar e continuar"
-
-msgid "plugins.generic.customLocale.search.key"
-msgstr "Pesquisar por chave"
-
-msgid "plugins.generic.customLocale.search.fileName"
-msgstr "Pesquisar em nomes de arquivo"
 
 msgid "plugins.generic.customLocale.name"
 msgstr "Tradução personalizada"

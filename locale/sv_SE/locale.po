@@ -11,9 +11,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 3.9.1\n"
 
-msgid "plugins.generic.customLocale.files.pageTitle"
-msgstr "Filnamn"
-
 msgid "plugins.generic.customLocale.customLocale"
 msgstr "Språk/regioner"
 
@@ -22,9 +19,6 @@ msgstr "Redigera {$filename}"
 
 msgid "plugins.generic.customLocale.customize"
 msgstr "Anpassa"
-
-msgid "plugins.generic.customLocale.path"
-msgstr "Åtgärd"
 
 msgid "plugins.generic.customLocale.noneCreated"
 msgstr "Inga filer hittades."

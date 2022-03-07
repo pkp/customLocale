@@ -28,21 +28,10 @@ msgstr "Lokalizacije"
 msgid "plugins.generic.customLocale.file.editHeader"
 msgstr "Prilagodite ključeve lokalizacije"
 
-msgid "plugins.generic.customLocale.localeKey.description"
-msgstr "Unesite cijeli ključ lokalizacije za pretragu."
-
 msgid "plugins.generic.customLocale.searchResultsCount"
 msgstr ""
 "Prikazivanje {{currentLocaleKeys.length}} od {{filteredKeysList.length}} "
 "rezultata za \"{{phraseSearched}}\"."
-
-msgid "plugins.generic.customLocale.fileDescription"
-msgstr ""
-"Unesite tekst u odgovarajuće prilagođeno polje za tekst. Ostavite prazno "
-"polje za prilagođeni tekst ako treba koristiti zadani OJS/OMP tekst."
-
-msgid "plugins.generic.customLocale.files.pageTitle"
-msgstr "Naziv fajla"
 
 msgid "plugins.generic.customLocale.file.custom"
 msgstr "Prilagođeni tekst"
@@ -53,35 +42,17 @@ msgstr "Zadani text"
 msgid "plugins.generic.customLocale.file.edit"
 msgstr "Uređivanje {$filename}"
 
-msgid "grid.action.printChanges"
+msgid "plugins.generic.customLocale.printChanges"
 msgstr "Preuzmite fajl koji sadrži popis svih prilagođavanja koje ste izvršili."
 
 msgid "plugins.generic.customLocale.customize"
 msgstr "Prilagodi"
-
-msgid "plugins.generic.customLocale.localeKeyValue"
-msgstr "Vrijednost"
-
-msgid "plugins.generic.customLocale.localeKey"
-msgstr "Ključ"
-
-msgid "plugins.generic.customLocale.path"
-msgstr "Akcija"
-
-msgid "plugins.generic.customLocale.printChanges"
-msgstr "Preuzmite dokumentaciju"
 
 msgid "plugins.generic.customLocale.noneCreated"
 msgstr "Nije pronađen nijedan fajl."
 
 msgid "plugins.generic.customLocale.saveAndContinue"
 msgstr "Sačuvaj i nastavi"
-
-msgid "plugins.generic.customLocale.search.key"
-msgstr "Potražite ključ"
-
-msgid "plugins.generic.customLocale.search.fileName"
-msgstr "Pretražite u imenima fajlova"
 
 msgid "plugins.generic.customLocale.description"
 msgstr ""

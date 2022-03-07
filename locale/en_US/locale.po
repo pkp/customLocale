@@ -22,37 +22,16 @@ msgstr ""
 "This plugin enables customization of the default user interface text used by "
 "OJS and OMP."
 
-msgid "plugins.generic.customLocale.search.fileName"
-msgstr "Search in file names"
-
-msgid "plugins.generic.customLocale.search.key"
-msgstr "Search for key"
-
 msgid "plugins.generic.customLocale.saveAndContinue"
 msgstr "Save and continue"
 
 msgid "plugins.generic.customLocale.noneCreated"
-msgstr "No files found."
-
-msgid "plugins.generic.customLocale.printChanges"
-msgstr "Download documentation"
-
-msgid "plugins.generic.customLocale.localeKey.description"
-msgstr "Enter an entire locale key to search for."
-
-msgid "plugins.generic.customLocale.path"
-msgstr "Action"
-
-msgid "plugins.generic.customLocale.localeKey"
-msgstr "Key"
-
-msgid "plugins.generic.customLocale.localeKeyValue"
-msgstr "Value"
+msgstr "No locales found."
 
 msgid "plugins.generic.customLocale.customize"
 msgstr "Customize"
 
-msgid "grid.action.printChanges"
+msgid "plugins.generic.customLocale.printChanges"
 msgstr "Download a file that lists all the customizations you made."
 
 msgid "plugins.generic.customLocale.file.editHeader"
@@ -70,21 +49,13 @@ msgstr "Custom Text"
 msgid "plugins.generic.customLocale.customLocale"
 msgstr "Locales"
 
-msgid "plugins.generic.customLocale.files.pageTitle"
-msgstr "File name"
-
 msgid "plugins.generic.customLocale.customLocaleFiles"
 msgstr "Locale files"
-
-msgid "plugins.generic.customLocale.searchDescription"
-msgstr "Enter a complete locale key here. Keys found are highlighted."
-
-msgid "plugins.generic.customLocale.fileDescription"
-msgstr ""
-"Enter text into corresponding custom text field. Leave custom text field "
-"blank if the default OJS/OMP text should be used."
 
 msgid "plugins.generic.customLocale.searchResultsCount"
 msgstr ""
 "Displaying {{ currentLocaleKeys.length }} of {{ filteredKeysList.length }} "
 "results for \"{{ phraseSearched }}\"."
+
+msgid "plugins.generic.customLocale.file.onlyModified"
+msgstr "Only modified"

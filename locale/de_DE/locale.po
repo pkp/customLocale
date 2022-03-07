@@ -22,38 +22,20 @@ msgstr ""
 "Dieses Plug-In ermöglicht die Anpassung der Standardeinstellungen für die "
 "Texte der von OJS und OMP verwendeten Benutzungsoberfläche."
 
-msgid "plugins.generic.customLocale.search.fileName"
-msgstr "Suche in den Dateinamen"
-
-msgid "plugins.generic.customLocale.search.key"
-msgstr "Suche nach einem Schlüssel"
-
 msgid "plugins.generic.customLocale.saveAndContinue"
 msgstr "Speichern und fortsetzen"
 
 msgid "plugins.generic.customLocale.noneCreated"
 msgstr "Es wurden keine Dateien gefunden."
 
-msgid "plugins.generic.customLocale.printChanges"
-msgstr "Dokumentation downloaden"
-
 msgid "plugins.generic.customLocale.localeKey.description"
 msgstr ""
 "Geben Sie hier den kompletten Schlüssel ein nach dem gesucht werden soll."
 
-msgid "plugins.generic.customLocale.path"
-msgstr "Aktion"
-
-msgid "plugins.generic.customLocale.localeKey"
-msgstr "Schlüssel"
-
-msgid "plugins.generic.customLocale.localeKeyValue"
-msgstr "Wert"
-
 msgid "plugins.generic.customLocale.customize"
 msgstr "Anpassen"
 
-msgid "grid.action.printChanges"
+msgid "plugins.generic.customLocale.printChanges"
 msgstr "Hier können Sie eine Datei downloaden, die alle Anpassungen auflistet."
 
 msgid "plugins.generic.customLocale.file.editHeader"
@@ -71,16 +53,8 @@ msgstr "Angepasster Text"
 msgid "plugins.generic.customLocale.customLocale"
 msgstr "Regionaleinstellung"
 
-msgid "plugins.generic.customLocale.files.pageTitle"
-msgstr "Dateiname"
-
 msgid "plugins.generic.customLocale.customLocaleFiles"
 msgstr "Regionaleinstellungsdateien"
-
-msgid "plugins.generic.customLocale.fileDescription"
-msgstr ""
-"Geben Sie den angepassten Text in das jeweilige Feld ein. Lassen Sie das "
-"Feld leer, wenn der OJS/OMP-Standardtext genutzt werden soll."
 
 msgid "plugins.generic.customLocale.searchResultsCount"
 msgstr "{{ currentLocaleKeys.length }} von {{ filteredKeysList.length }} Ergebnissen für \"{{ phraseSearched }}\" ausgegeben."

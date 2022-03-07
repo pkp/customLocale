@@ -17,19 +17,8 @@ msgstr ""
 "عرض {{ currentLocaleKeys.length }} من أصل {{ filteredKeysList.length }} "
 "نتيجة لعبارة البحث \"{{ phraseSearched }}\"."
 
-msgid "plugins.generic.customLocale.fileDescription"
-msgstr ""
-"أدخل نصاً في الحقل المقابل ليكون بمثابة النص المخصص. أغفل إدخال النص إن كنت "
-"تريد استعمال النص الافتراضي لنظام المجلات المفتوحة أو نظام OMP."
-
-msgid "plugins.generic.customLocale.searchDescription"
-msgstr "أدخل المفتاح الكامل للغة هنا. المفاتيح الموجودة سلفاً، مبرزة."
-
 msgid "plugins.generic.customLocale.customLocaleFiles"
 msgstr "ملفات اللغة"
-
-msgid "plugins.generic.customLocale.files.pageTitle"
-msgstr "اسم الملف"
 
 msgid "plugins.generic.customLocale.customLocale"
 msgstr "اللغات"
@@ -46,38 +35,17 @@ msgstr "تعديل {$filename}"
 msgid "plugins.generic.customLocale.file.editHeader"
 msgstr "تخصيص مفاتيح اللغة"
 
-msgid "grid.action.printChanges"
+msgid "plugins.generic.customLocale.printChanges"
 msgstr "تنزيل ملف يحتوي على كل التخصيصات التي قمت بها."
 
 msgid "plugins.generic.customLocale.customize"
 msgstr "التخصيص"
-
-msgid "plugins.generic.customLocale.localeKeyValue"
-msgstr "القيمة"
-
-msgid "plugins.generic.customLocale.localeKey"
-msgstr "المفتاح"
-
-msgid "plugins.generic.customLocale.path"
-msgstr "الإجراء"
-
-msgid "plugins.generic.customLocale.localeKey.description"
-msgstr "أدخل المفتاح الكامل للغة التي تريد البحث عنها."
-
-msgid "plugins.generic.customLocale.printChanges"
-msgstr "تنزيل أدبيات النظام"
 
 msgid "plugins.generic.customLocale.noneCreated"
 msgstr "تعذر العثور على أي ملفات."
 
 msgid "plugins.generic.customLocale.saveAndContinue"
 msgstr "إحفظ واستمر"
-
-msgid "plugins.generic.customLocale.search.key"
-msgstr "البحث عن مفتاح"
-
-msgid "plugins.generic.customLocale.search.fileName"
-msgstr "البحث في أسماء الملفات"
 
 msgid "plugins.generic.customLocale.description"
 msgstr ""

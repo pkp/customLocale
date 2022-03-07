@@ -16,20 +16,12 @@ msgstr ""
 "Menampilkan {{ currentLocaleKeys.length }} dari {{ filteredKeysList.length }}"
 " hasil untuk \"{{ phraseSearched }}\"."
 
-msgid "plugins.generic.customLocale.fileDescription"
-msgstr ""
-"Masukkan teks ke dalam kolom teks kustom yang sesuai. Kosongkan kolomnya "
-"jika teks OJS/OMP bawaan harus digunakan."
-
 msgid "plugins.generic.customLocale.searchDescription"
 msgstr ""
 "Masukkan local key lengkap di sini. Key yang ditemukan akan diberi tanda."
 
 msgid "plugins.generic.customLocale.customLocaleFiles"
 msgstr "File bahasa"
-
-msgid "plugins.generic.customLocale.files.pageTitle"
-msgstr "Nama file"
 
 msgid "plugins.generic.customLocale.customLocale"
 msgstr "Bahasa"
@@ -46,38 +38,17 @@ msgstr "Edit {$filename}"
 msgid "plugins.generic.customLocale.file.editHeader"
 msgstr "Ubah local key"
 
-msgid "grid.action.printChanges"
+msgid "plugins.generic.customLocale.printChanges"
 msgstr "Unduh fileh yang berisi semua perubahan yang telah Anda lakukan."
 
 msgid "plugins.generic.customLocale.customize"
 msgstr "Ubah"
-
-msgid "plugins.generic.customLocale.localeKeyValue"
-msgstr "Nilai"
-
-msgid "plugins.generic.customLocale.localeKey"
-msgstr "Kunci"
-
-msgid "plugins.generic.customLocale.path"
-msgstr "Aksi"
-
-msgid "plugins.generic.customLocale.localeKey.description"
-msgstr "Masukkan local key lengkap untuk pencarian."
-
-msgid "plugins.generic.customLocale.printChanges"
-msgstr "Dokumentasi Unduhan"
 
 msgid "plugins.generic.customLocale.noneCreated"
 msgstr "Tidak ada file yang ditemukan."
 
 msgid "plugins.generic.customLocale.saveAndContinue"
 msgstr "Simpan dan lanjutkan"
-
-msgid "plugins.generic.customLocale.search.key"
-msgstr "Cari key"
-
-msgid "plugins.generic.customLocale.search.fileName"
-msgstr "Cari pada nama file"
 
 msgid "plugins.generic.customLocale.description"
 msgstr ""

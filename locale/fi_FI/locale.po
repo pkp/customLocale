@@ -14,20 +14,11 @@ msgstr ""
 msgid "plugins.generic.customLocale.customLocaleFiles"
 msgstr "Kielialueiden tiedostot"
 
-msgid "plugins.generic.customLocale.files.pageTitle"
-msgstr "Tiedostonimi"
-
 msgid "plugins.generic.customLocale.file.custom"
 msgstr "Mukautettu teksti"
 
 msgid "plugins.generic.customLocale.file.reference"
 msgstr "Oletusteksti"
-
-msgid "plugins.generic.customLocale.localeKey"
-msgstr "Avain"
-
-msgid "plugins.generic.customLocale.path"
-msgstr "Toiminto"
 
 msgid "plugins.generic.customLocale.noneCreated"
 msgstr "Tiedostoja ei löytynyt."
@@ -40,14 +31,6 @@ msgstr ""
 "Näytetään tulos {{ currentLocaleKeys.length }}/{{ filteredKeysList.length }} "
 "hakulauseesta \"{{ phraseSearched }}\"."
 
-msgid "plugins.generic.customLocale.fileDescription"
-msgstr ""
-"Kirjoita teksti mukautettavaan kenttään. Jätä kenttä tyhjäksi, jos haluat "
-"käyttää alkuperäistä käännöstä."
-
-msgid "plugins.generic.customLocale.searchDescription"
-msgstr "Anna haettava kielialueen sana. Löydetyt sanat korostetaan."
-
 msgid "plugins.generic.customLocale.customLocale"
 msgstr "Kielialueet"
 
@@ -57,26 +40,11 @@ msgstr "Muokataan {$filename}"
 msgid "plugins.generic.customLocale.file.editHeader"
 msgstr "Mukauta käännöksiä"
 
-msgid "grid.action.printChanges"
+msgid "plugins.generic.customLocale.printChanges"
 msgstr "Lataa tiedostona kaikki mukautuksesi."
 
 msgid "plugins.generic.customLocale.customize"
 msgstr "Mukauta"
-
-msgid "plugins.generic.customLocale.localeKeyValue"
-msgstr "Käännös"
-
-msgid "plugins.generic.customLocale.localeKey.description"
-msgstr "Anna kokonainen etsittävä käännösavain."
-
-msgid "plugins.generic.customLocale.printChanges"
-msgstr "Lataa dokumentaatio"
-
-msgid "plugins.generic.customLocale.search.key"
-msgstr "Hae käännösavainta"
-
-msgid "plugins.generic.customLocale.search.fileName"
-msgstr "Hae tiedostonimistä"
 
 msgid "plugins.generic.customLocale.description"
 msgstr ""

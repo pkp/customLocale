@@ -17,21 +17,10 @@ msgstr "Sửa {$filename}"
 msgid "plugins.generic.customLocale.noneCreated"
 msgstr "Không có tập tin nào được tìm thấy."
 
-msgid "plugins.generic.customLocale.files.pageTitle"
-msgstr "Tên tập tin"
-
 msgid "plugins.generic.customLocale.searchResultsCount"
 msgstr ""
 "Hiển thị {{ currentLocaleKeys.length }} của {{ filteredKeysList.length }} "
 "cho \"{{ phraseSearched }}.\""
-
-msgid "plugins.generic.customLocale.fileDescription"
-msgstr ""
-"Nhập văn bản vào trường văn bản tùy chỉnh tương ứng. Để trống trường văn bản "
-"tùy chỉnh nếu sử dụng văn bản OMP mặc định."
-
-msgid "plugins.generic.customLocale.searchDescription"
-msgstr "Nhập một khóa ngôn ngữ đầy đủ ở đây. Các khóa tìm thấy được tô sáng."
 
 msgid "plugins.generic.customLocale.customLocaleFiles"
 msgstr "Các tập tin ngôn ngữ"
@@ -48,35 +37,14 @@ msgstr "Văn bản mặc định"
 msgid "plugins.generic.customLocale.file.editHeader"
 msgstr "Tùy chỉnh khóa ngôn ngữ"
 
-msgid "grid.action.printChanges"
+msgid "plugins.generic.customLocale.printChanges"
 msgstr "Tải xuống một tệp liệt kê tất cả các tùy chỉnh bạn đã thực hiện."
 
 msgid "plugins.generic.customLocale.customize"
 msgstr "Tùy chỉnh"
 
-msgid "plugins.generic.customLocale.localeKeyValue"
-msgstr "Giá trị"
-
-msgid "plugins.generic.customLocale.localeKey"
-msgstr "Khóa"
-
-msgid "plugins.generic.customLocale.path"
-msgstr "Hoạt động"
-
-msgid "plugins.generic.customLocale.localeKey.description"
-msgstr "Nhập toàn bộ khóa ngôn ngữ để tìm kiếm."
-
-msgid "plugins.generic.customLocale.printChanges"
-msgstr "Tải tài liệu"
-
 msgid "plugins.generic.customLocale.saveAndContinue"
 msgstr "Lưu và tiếp tục"
-
-msgid "plugins.generic.customLocale.search.key"
-msgstr "Tìm kiếm khóa"
-
-msgid "plugins.generic.customLocale.search.fileName"
-msgstr "Tìm kiếm trong tên tập tin"
 
 msgid "plugins.generic.customLocale.description"
 msgstr ""

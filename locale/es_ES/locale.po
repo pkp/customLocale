@@ -22,38 +22,20 @@ msgstr ""
 "Este módulo permite la personalización del texto predeterminado de la "
 "interfaz de usuario/a utilizado por OJS y OMP."
 
-msgid "plugins.generic.customLocale.search.fileName"
-msgstr "Buscar en los nombres de archivo"
-
-msgid "plugins.generic.customLocale.search.key"
-msgstr "Buscar por llave"
-
 msgid "plugins.generic.customLocale.saveAndContinue"
 msgstr "Guardar y continuar"
 
 msgid "plugins.generic.customLocale.noneCreated"
 msgstr "No se encontraron archivos."
 
-msgid "plugins.generic.customLocale.printChanges"
-msgstr "Descargar documentación"
-
 msgid "plugins.generic.customLocale.localeKey.description"
 msgstr ""
 "Introduzca la clave de la configuración regional completa que desee buscar."
 
-msgid "plugins.generic.customLocale.path"
-msgstr "Acción"
-
-msgid "plugins.generic.customLocale.localeKey"
-msgstr "Clave"
-
-msgid "plugins.generic.customLocale.localeKeyValue"
-msgstr "Valor"
-
 msgid "plugins.generic.customLocale.customize"
 msgstr "Personalizar"
 
-msgid "grid.action.printChanges"
+msgid "plugins.generic.customLocale.printChanges"
 msgstr ""
 "Descargue un archivo con el listado de todas las personalizaciones que ha "
 "realizado."
@@ -70,9 +52,6 @@ msgstr "Texto personalizado"
 msgid "plugins.generic.customLocale.customLocale"
 msgstr "Configuraciones regionales"
 
-msgid "plugins.generic.customLocale.files.pageTitle"
-msgstr "Nombre de archivo"
-
 msgid "plugins.generic.customLocale.customLocaleFiles"
 msgstr "Archivos de configuración regionales"
 
@@ -80,12 +59,6 @@ msgid "plugins.generic.customLocale.searchDescription"
 msgstr ""
 "Introduzca aquí una clave de configuración regional completa. Las claves "
 "encontradas están resaltadas."
-
-msgid "plugins.generic.customLocale.fileDescription"
-msgstr ""
-"Introduzca el texto en el campo de texto personalizado correspondiente. Deje "
-"en blanco el campo de texto personalizado si quiere usar el texto "
-"predeterminado de OJS/OMP."
 
 msgid "plugins.generic.customLocale.searchResultsCount"
 msgstr ""

@@ -16,19 +16,8 @@ msgstr ""
 "Zobrazení {{ currentLocaleKeys.length }} z {{ filteredKeysList.length }} "
 "výsledků pro \"{{ phraseSearched }}\"."
 
-msgid "plugins.generic.customLocale.fileDescription"
-msgstr ""
-"Zadejte text do odpovídajícího vlastního textového pole. Pokud chcete použít "
-"výchozí text OJS/OMP, ponechte vlastní textové pole prázdné."
-
-msgid "plugins.generic.customLocale.searchDescription"
-msgstr "Zde vložte kompletní lokalizační klíče. Nalezené klíče jsou zvýrazněny."
-
 msgid "plugins.generic.customLocale.customLocaleFiles"
 msgstr "Soubory lokalizací"
-
-msgid "plugins.generic.customLocale.files.pageTitle"
-msgstr "Jméno souboru"
 
 msgid "plugins.generic.customLocale.customLocale"
 msgstr "Lokalizace"
@@ -45,39 +34,18 @@ msgstr "Editace {$filename}"
 msgid "plugins.generic.customLocale.file.editHeader"
 msgstr "Přizpůsobení místních klíčů"
 
-msgid "grid.action.printChanges"
+msgid "plugins.generic.customLocale.printChanges"
 msgstr ""
 "Stáhnutí souboru, ve kterém je seznam všech přizpůsobení, které jste udělali."
 
 msgid "plugins.generic.customLocale.customize"
 msgstr "Přizpůsobení"
 
-msgid "plugins.generic.customLocale.localeKeyValue"
-msgstr "Hodnota"
-
-msgid "plugins.generic.customLocale.localeKey"
-msgstr "Klíč"
-
-msgid "plugins.generic.customLocale.path"
-msgstr "Akce"
-
-msgid "plugins.generic.customLocale.localeKey.description"
-msgstr "Vložte celý místní klíč, který se má hledat."
-
-msgid "plugins.generic.customLocale.printChanges"
-msgstr "Stažení dokumentace"
-
 msgid "plugins.generic.customLocale.noneCreated"
 msgstr "Nebyl nalezen žádný soubor."
 
 msgid "plugins.generic.customLocale.saveAndContinue"
 msgstr "Uložit a pokračovat"
-
-msgid "plugins.generic.customLocale.search.key"
-msgstr "Hledání klíče"
-
-msgid "plugins.generic.customLocale.search.fileName"
-msgstr "Hledání v názvech souborů"
 
 msgid "plugins.generic.customLocale.description"
 msgstr ""

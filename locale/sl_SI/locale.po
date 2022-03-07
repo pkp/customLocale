@@ -17,20 +17,12 @@ msgstr ""
 "Prikazovanje {{ currentLocaleKeys.length }}  od {{ filteredKeysList.length }}"
 "  rezultatov za \"{{ phraseSearched }}\"."
 
-msgid "plugins.generic.customLocale.fileDescription"
-msgstr ""
-"Prilagojeno besedilo vnesite v vnosno polje. Pustite prazno, če ne želite "
-"spremeniti privzetega besedila za OJS/OMP."
-
 msgid "plugins.generic.customLocale.searchDescription"
 msgstr ""
 "Tukaj vnesite celoten ključ za lokalizacijo. Najdeni ključi so označeni."
 
 msgid "plugins.generic.customLocale.customLocaleFiles"
 msgstr "Jezikovne datoteke"
-
-msgid "plugins.generic.customLocale.files.pageTitle"
-msgstr "Ime datoteke"
 
 msgid "plugins.generic.customLocale.customLocale"
 msgstr "Jeziki"
@@ -47,38 +39,17 @@ msgstr "Urejanje  {$filename}"
 msgid "plugins.generic.customLocale.file.editHeader"
 msgstr "Prilagodi lokalizacijske ključe"
 
-msgid "grid.action.printChanges"
+msgid "plugins.generic.customLocale.printChanges"
 msgstr "Prenesi datoteko, ki vsebuje vse prilagoditve, ki ste jih naredili."
 
 msgid "plugins.generic.customLocale.customize"
 msgstr "Prilagodi"
-
-msgid "plugins.generic.customLocale.localeKeyValue"
-msgstr "Vrednost"
-
-msgid "plugins.generic.customLocale.localeKey"
-msgstr "Ključ"
-
-msgid "plugins.generic.customLocale.path"
-msgstr "Akcija"
-
-msgid "plugins.generic.customLocale.localeKey.description"
-msgstr "Vnesite celoten ključ za iskanje."
-
-msgid "plugins.generic.customLocale.printChanges"
-msgstr "Prenesi dokumentacijo"
 
 msgid "plugins.generic.customLocale.noneCreated"
 msgstr "Nobena datoteka ni bila najdena."
 
 msgid "plugins.generic.customLocale.saveAndContinue"
 msgstr "Shrani in nadaljuj"
-
-msgid "plugins.generic.customLocale.search.key"
-msgstr "Išči po ključu"
-
-msgid "plugins.generic.customLocale.search.fileName"
-msgstr "Išči v datotekah z imeni"
 
 msgid "plugins.generic.customLocale.description"
 msgstr ""

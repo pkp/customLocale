@@ -17,11 +17,6 @@ msgstr ""
 "Visning av {{ currentLocaleKeys.length }} av {{ filteredKeysList.length }} "
 "resulter for \"{{ phraseSearched }}\"."
 
-msgid "plugins.generic.customLocale.fileDescription"
-msgstr ""
-"Legg inn tekst i det korresponderende brukerdefinerte tekstfeltet. La feltet "
-"stå blankt hvis standard tekst fra OJS/OMP skal brukes."
-
 msgid "plugins.generic.customLocale.searchDescription"
 msgstr ""
 "Legg inn en komplett språknøkkel her. Språknøkler som er funnet blir "
@@ -29,9 +24,6 @@ msgstr ""
 
 msgid "plugins.generic.customLocale.customLocaleFiles"
 msgstr "Språkfiler"
-
-msgid "plugins.generic.customLocale.files.pageTitle"
-msgstr "Filnavn"
 
 msgid "plugins.generic.customLocale.customLocale"
 msgstr "Språk"
@@ -48,38 +40,17 @@ msgstr "Rediger {filename}"
 msgid "plugins.generic.customLocale.file.editHeader"
 msgstr "Tilpass språkkoder"
 
-msgid "grid.action.printChanges"
+msgid "plugins.generic.customLocale.printChanges"
 msgstr "Last ned en fil som viser alle tilpasninger du har gjort."
 
 msgid "plugins.generic.customLocale.customize"
 msgstr "Tilpass"
-
-msgid "plugins.generic.customLocale.localeKeyValue"
-msgstr "Verdi"
-
-msgid "plugins.generic.customLocale.localeKey"
-msgstr "Nøkkel"
-
-msgid "plugins.generic.customLocale.path"
-msgstr "Handling"
-
-msgid "plugins.generic.customLocale.localeKey.description"
-msgstr "Skriv inn en hel språknøkkel å søke etter."
-
-msgid "plugins.generic.customLocale.printChanges"
-msgstr "Last ned dokumentasjon"
 
 msgid "plugins.generic.customLocale.noneCreated"
 msgstr "Ingen filer ble funnet."
 
 msgid "plugins.generic.customLocale.saveAndContinue"
 msgstr "Lagre og fortsett"
-
-msgid "plugins.generic.customLocale.search.key"
-msgstr "Søk etter nøkkel"
-
-msgid "plugins.generic.customLocale.search.fileName"
-msgstr "Søk i filnavn"
 
 msgid "plugins.generic.customLocale.description"
 msgstr ""
