@@ -132,10 +132,9 @@ class CustomLocalePlugin extends GenericPlugin
             return $path;
         }
 
-        $context = Application::get()->getRequest()->getContext();
-        $contextFileManager = new ContextFileManager($context->getId());
+        $contextFileManager = static::getContextFileManager();
         $path = $contextFileManager->getBasePath() . static::LOCALE_FOLDER;
-        if (!$contextFileManager->fileExists($path, 'dir')) {
+        if (!is_dir($path)) {
             $contextFileManager->mkdir($path);
         }
 
@@ -159,6 +158,15 @@ class CustomLocalePlugin extends GenericPlugin
         $entries = array_filter($entries, fn (string $path) => !str_starts_with($path, $customLocalePath), ARRAY_FILTER_USE_KEY);
         $bundle->setEntries($entries);
         return $translator = $bundle->getTranslator();
+    }
+
+    /**
+     * Retrieves an instance of the ContextFileManager
+     */
+    public static function getContextFileManager(): ContextFileManager
+    {
+        $context = Application::get()->getRequest()->getContext();
+        return new ContextFileManager($context->getId());
     }
 
     /**

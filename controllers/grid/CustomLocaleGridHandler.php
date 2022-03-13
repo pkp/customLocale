@@ -15,6 +15,7 @@ use APP\notification\NotificationManager;
 use APP\plugins\generic\customLocale\classes\CustomLocale;
 use APP\plugins\generic\customLocale\controllers\grid\form\LocaleFileForm;
 use APP\plugins\generic\customLocale\CustomLocalePlugin;
+use Exception;
 use Gettext\Generator\PoGenerator;
 use Gettext\Translation;
 use Gettext\Translations;
@@ -23,7 +24,6 @@ use PKP\controllers\grid\GridColumn;
 use PKP\controllers\grid\GridHandler;
 use PKP\core\JSONMessage;
 use PKP\core\PKPRequest;
-use PKP\file\ContextFileManager;
 use PKP\i18n\translation\LocaleFile;
 use PKP\security\authorization\ContextAccessPolicy;
 use PKP\security\Role;
@@ -72,11 +72,9 @@ class CustomLocaleGridHandler extends GridHandler
      */
     public function updateLocale(array $args, PKPRequest $request): JSONMessage
     {
-        $context = $request->getContext();
         ['locale' => $locale, 'changes' => $changes] = $args;
 
         if (!count($changes)) {
-            $context = $request->getContext();
             $this->setupTemplate($request);
             // Create and present the edit form
             $localeFileForm = new LocaleFileForm(self::$plugin, $locale);
@@ -85,10 +83,10 @@ class CustomLocaleGridHandler extends GridHandler
         }
 
         // save changes
-        $customFilePath = CustomLocalePlugin::getStoragePath() . "/${locale}/locale.po";
-        $contextFileManager = new ContextFileManager($context->getId());
+        $customLocalePath = CustomLocalePlugin::getStoragePath();
+        $customFilePath = "${customLocalePath}/${locale}/locale.po";
         $translator = CustomLocalePlugin::getTranslator($locale);
-        $translations = $contextFileManager->fileExists($customFilePath)
+        $translations = file_exists($customFilePath)
             ? LocaleFile::loadTranslations($customFilePath)
             : Translations::create(null, $locale);
         foreach ($changes as $key => $value) {
@@ -107,8 +105,14 @@ class CustomLocaleGridHandler extends GridHandler
             $translation->translate($value);
         }
 
+        $contextFileManager = CustomLocalePlugin::getContextFileManager();
+        if (!is_dir($basePath = dirname($customFilePath))) {
+            $contextFileManager->mkdir($basePath);
+        }
         $poGenerator = new PoGenerator();
-        $poGenerator->generateFile($translations, $customFilePath);
+        if (!$poGenerator->generateFile($translations, $customFilePath)) {
+            throw new Exception('Failed to serialize translations');
+        }
 
         // Create success notification and close modal on save
         $notificationMgr = new NotificationManager();

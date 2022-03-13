@@ -15,7 +15,6 @@ use APP\plugins\generic\customLocale\CustomLocalePlugin;
 use APP\template\TemplateManager;
 use Exception;
 use PKP\facades\Locale;
-use PKP\file\ContextFileManager;
 use PKP\form\Form;
 use PKP\i18n\translation\LocaleFile;
 
@@ -40,9 +39,7 @@ class LocaleFileForm extends Form
             throw new Exception("The locale {$this->locale} is not supported");
         }
 
-        $contextFileManager = new ContextFileManager($request->getContext()->getId());
         $customLocalePath = CustomLocalePlugin::getStoragePath() . "/{$this->locale}/locale.po";
-
         $referenceLocaleContents = [];
         foreach (CustomLocalePlugin::getTranslator($this->locale)->getEntries() as $key => $value) {
             $referenceLocaleContents[] = [
@@ -50,10 +47,7 @@ class LocaleFileForm extends Form
                 'value' => $value
             ];
         }
-        $localeContents = $contextFileManager->fileExists($customLocalePath)
-            ? reset(LocaleFile::loadArray($customLocalePath)['messages'])
-            : [];
-
+        $localeContents = file_exists($customLocalePath) ? reset(LocaleFile::loadArray($customLocalePath)['messages']) : [];
         $templateMgr = TemplateManager::getManager($request);
         $templateMgr->assign([
             'name' => Locale::getMetadata($this->locale)->getDisplayName(),

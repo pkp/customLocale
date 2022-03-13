@@ -85,9 +85,14 @@ class I15_LocaleMigration extends Migration
                 $pathsToUnlink[] = $path;
             }
 
+            $contextFileManager = CustomLocalePlugin::getContextFileManager();
             // Generates the updated locale files
             foreach ($translationsByLocale as $locale => $translations) {
-                $customFilePath = $customLocalePath . "/${locale}/locale.po";
+                $basePath = "${customLocalePath}/${locale}";
+                if (!is_dir($basePath)) {
+                    $contextFileManager->mkdir($basePath);
+                }
+                $customFilePath = "${basePath}/locale.po";
                 if (!(new PoGenerator())->generateFile($translations, $customFilePath)) {
                     throw new Exception('Failed to serialize translations');
                 }
