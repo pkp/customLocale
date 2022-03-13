@@ -12,25 +12,18 @@
 namespace APP\plugins\generic\customLocale;
 
 use APP\core\Application;
+use APP\plugins\generic\customLocale\classes\migration\upgrade\v1_2_0\I15_LocaleMigration;
 use APP\plugins\generic\customLocale\controllers\grid\CustomLocaleGridHandler;
 use APP\template\TemplateManager;
 use Exception;
-use Gettext\Generator\PoGenerator;
-use Gettext\Translations;
 use PKP\core\PKPApplication;
 use PKP\facades\Locale;
 use PKP\file\ContextFileManager;
-use PKP\i18n\translation\LocaleFile;
 use PKP\i18n\translation\Translator;
 use PKP\linkAction\LinkAction;
 use PKP\linkAction\request\RedirectAction;
 use PKP\plugins\GenericPlugin;
 use PKP\plugins\HookRegistry;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-use RecursiveRegexIterator;
-use RegexIterator;
-use SplFileObject;
 
 class CustomLocalePlugin extends GenericPlugin
 {
@@ -48,7 +41,7 @@ class CustomLocalePlugin extends GenericPlugin
         if (!$success || Application::isUnderMaintenance() || !$this->getEnabled()) {
             return $success;
         }
-        $this->upgradeLocaleFiles();
+        $this->upgrade();
         // Add custom locale data for already registered locale files.
         $this->setupLocalizationOverriding();
         $this->setupGridHandler();
@@ -141,12 +134,12 @@ class CustomLocalePlugin extends GenericPlugin
 
         $context = Application::get()->getRequest()->getContext();
         $contextFileManager = new ContextFileManager($context->getId());
-        $path = realpath($contextFileManager->getBasePath() . static::LOCALE_FOLDER);
+        $path = $contextFileManager->getBasePath() . static::LOCALE_FOLDER;
         if (!$contextFileManager->fileExists($path, 'dir')) {
             $contextFileManager->mkdir($path);
         }
 
-        return $path;
+        return realpath($path);
     }
 
     /**
@@ -213,95 +206,15 @@ class CustomLocalePlugin extends GenericPlugin
     }
 
     /**
-     * Attempts to update the locale files to the new structure
+     * Attempts to upgrade the plugin
      */
-    public function upgradeLocaleFiles(): void
+    public function upgrade(): void
     {
-        $customLocalePath = CustomLocalePlugin::getStoragePath();
-        // File lock to ensure this process is executed only once
-        $lockFilePath = $customLocalePath . '/migration-3_3_0.lock';
-        if (file_exists($lockFilePath)) {
-            return;
-        }
-
-        $success = false;
-        $lockFile = null;
         try {
-            $lockFile = new SplFileObject($lockFilePath, 'x');
-            if (!$lockFile->flock(LOCK_EX)) {
-                throw new Exception('Failed to lock file');
-            }
-
-            // Get all po-files in the custom locale directory
-            $directory = new RecursiveDirectoryIterator($customLocalePath);
-            $iterator = new RecursiveIteratorIterator($directory);
-            $regex = new RegexIterator($iterator, '/^.+\.po$/i', RecursiveRegexIterator::GET_MATCH);
-            $files = array_keys(iterator_to_array($regex));
-
-            /** @var Translations[] */
-            $translationsByLocale = [];
-            $pathsToUnlink = [];
-            foreach ($files as $path) {
-                // Removes the base folder from the path
-                $trailingPath = substr($path, strlen($customLocalePath) + 1);
-                $parts = explode('/', $trailingPath);
-                // The first part should be the locale
-                $locale = $parts[0];
-                if (!Locale::isLocaleValid($locale)) {
-                    continue;
-                }
-                $filename = $parts[1] ?? '';
-                // If the second part is the file "locale.po" file, then we're done with this entry
-                if ($filename === 'locale.po') {
-                    continue;
-                }
-
-                // Attempts to load existing translations, otherwise create a new set
-                $customFilePath = $customLocalePath . "/${locale}/locale.po";
-                $translationsByLocale[$locale] ??= file_exists($customFilePath)
-                    ? LocaleFile::loadTranslations($customFilePath)
-                    : Translations::create(null, $locale);
-                // Loads the translations from the outdated locale files and merge all of them into a single Translations object
-                $newTranslations = LocaleFile::loadTranslations($path);
-                $translationsByLocale[$locale] = $translationsByLocale[$locale]->mergeWith($newTranslations);
-                // Keeps track of the locale files that we merged, so we can remove them later
-                $pathsToUnlink[] = $path;
-            }
-
-            // Generates the updated locale files
-            foreach ($translationsByLocale as $locale => $translations) {
-                $customFilePath = $customLocalePath . "/${locale}/locale.po";
-                if (!(new PoGenerator())->generateFile($translations, $customFilePath)) {
-                    throw new Exception('Failed to serialize translations');
-                }
-            }
-
-            // Removes outdated locale files
-            foreach ($pathsToUnlink as $path) {
-                if (!unlink($path)) {
-                    throw new Exception('Failed to remove translations');
-                }
-            }
-
-            // Attempts to remove empty folders
-            $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($customLocalePath), RecursiveIteratorIterator::CHILD_FIRST);
-            foreach ($files as $file) {
-                if (!in_array($file->getBasename(), ['.', '..']) && $file->isDir()) {
-                    @rmdir($file->getPathName());
-                }
-            }
-
-            $success = true;
-        } catch (Exception $e) {
+            (new I15_LocaleMigration())->up();
+        }
+        catch (Exception $e) {
             error_log("An exception happened while upgrading the customLocale plugin.\n" . $e);
-        } finally {
-            if ($lockFile) {
-                $lockFile->flock(LOCK_UN);
-                $lockFile = null;
-                if (!$success) {
-                    unlink($lockFilePath);
-                }
-            }
         }
     }
 
