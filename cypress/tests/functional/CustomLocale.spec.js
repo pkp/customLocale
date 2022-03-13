@@ -23,7 +23,7 @@ describe('Custom Locale plugin tests', function() {
 		
 		// FIXME: The new settings tab handler doesn't jump right to the correct tab.
 		cy.get('button#customLocale-button').click();
-		cy.get('span.label:contains("lib/pkp/locale/en_US/user.po")').parent().parent().parent().contains('Edit').click();
+		cy.get('span.label:contains("en_US")').parent().parent().parent().contains('Edit').click();
 		cy.wait(1000); // Form init
 		cy.get('input.pkpSearch__input').type('user.affiliation');
 		cy.get('button.pkpButton:contains("Search")').click();

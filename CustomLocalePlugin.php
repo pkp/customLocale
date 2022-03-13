@@ -225,8 +225,9 @@ class CustomLocalePlugin extends GenericPlugin
         }
 
         $success = false;
-        $lockFile = new SplFileObject($lockFilePath, 'x');
+        $lockFile = null;
         try {
+            $lockFile = new SplFileObject($lockFilePath, 'x');
             if (!$lockFile->flock(LOCK_EX)) {
                 throw new Exception('Failed to lock file');
             }
@@ -294,10 +295,12 @@ class CustomLocalePlugin extends GenericPlugin
         } catch (Exception $e) {
             error_log("An exception happened while upgrading the customLocale plugin.\n" . $e);
         } finally {
-            $lockFile->flock(LOCK_UN);
-            $lockFile = null;
-            if (!$success) {
-                unlink($lockFilePath);
+            if ($lockFile) {
+                $lockFile->flock(LOCK_UN);
+                $lockFile = null;
+                if (!$success) {
+                    unlink($lockFilePath);
+                }
             }
         }
     }
