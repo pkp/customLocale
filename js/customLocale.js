@@ -28,13 +28,15 @@ $(function() {
 				this.currentPage = -1;
 				var filteredKeysList = [];
 				var search = new RegExp(this.searchPhrase, 'i');
-				for (var i in this.localeKeysMaster) {
-					var canAdd = !this.onlyModified || this.localEdited[this.localeKeysMaster[i].localeKey];
-					if (canAdd && search.test(this.localeKeysMaster[i].localeKey + this.localeKeysMaster[i].value)) {
-						filteredKeysList.push({
-							localeKey: this.localeKeysMaster[i].localeKey,
-							value: this.localeKeysMaster[i].value,
-						});
+				for (var i = -1; ++i < this.localeKeysMaster.length; ) {
+					var item = {
+						localeKey: this.localeKeysMaster[i].localeKey,
+						value: this.localeKeysMaster[i].value,
+					};
+					var edited = this.localEdited[item.localeKey];
+					var canAdd = !this.onlyModified || edited;
+					if (canAdd && search.test(item.localeKey + item.value + (edited || ''))) {
+						filteredKeysList.push(item);
 					}
 				}
 				// Similar to initializeView, but uses search results rather than master list

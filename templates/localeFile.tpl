@@ -103,7 +103,7 @@
 										v-model="localEdited[localeKey.localeKey]"
 										rows="5"
 										cols="50"
-										v-bind:class="{ valueChanged : localEdited[localeKey.localeKey] != null}"
+										:class="{ valueChanged : localEdited[localeKey.localeKey] != null}"
 									></textarea>
 								</div>
 								<div v-else>
@@ -112,7 +112,7 @@
 										:id="'custom-text-' + index"
 										:name="'changes[' + localeKey.localeKey + ']'"
 										v-model="localEdited[localeKey.localeKey]"
-										v-bind:class="{ valueChanged : localEdited[localeKey.localeKey] != null}"
+										:class="{ valueChanged : localEdited[localeKey.localeKey] != null}"
 									>
 								</div>
 							</td>
@@ -147,10 +147,10 @@
 					<button
 						v-else
 						class="pkpButton"
-						v-bind:class="currentPage === page.value ? 'pkpButton--isActive' : 'pkpButton--isLink'"
+						:class="currentPage === page.value ? 'pkpButton--isActive' : 'pkpButton--isLink'"
 						type="button"
 						@click="() => (currentPage = page.value)"
-						v-bind:aria-label="'{translate key="common.pagination.goToPage" page="{translate key='common.pageNumber' pageNumber=''}"}' + page.value"
+						:aria-label="'{translate key="common.pagination.goToPage" page="{translate key='common.pageNumber' pageNumber=''}"}' + page.value"
 					>
 						{{ page.value }}
 					</button>
