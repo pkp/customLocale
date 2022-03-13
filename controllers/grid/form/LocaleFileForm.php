@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file controllers/grid/form/LocaleFileForm.inc.php
+ * @file controllers/grid/form/LocaleFileForm.php
  *
  * Copyright (c) 2016-2022 Language Science Press
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
@@ -9,7 +9,11 @@
  * @class LocaleFileForm
  */
 
+namespace APP\plugins\generic\customLocale\controllers\grid\form;
+
+use APP\plugins\generic\customLocale\CustomLocalePlugin;
 use APP\template\TemplateManager;
+use Exception;
 use PKP\facades\Locale;
 use PKP\file\ContextFileManager;
 use PKP\form\Form;

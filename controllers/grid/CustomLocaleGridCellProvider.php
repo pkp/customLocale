@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file controllers/grid/CustomLocaleGridCellProvider.inc.php
+ * @file controllers/grid/CustomLocaleGridCellProvider.php
  *
  * Copyright (c) 2016-2022 Language Science Press
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
@@ -9,8 +9,13 @@
  * @class CustomLocaleGridCellProvider
  */
 
+namespace APP\plugins\generic\customLocale\controllers\grid;
+
+use APP\plugins\generic\customLocale\classes\CustomLocale;
 use PKP\controllers\grid\GridCellProvider;
+use PKP\controllers\grid\GridColumn;
 use PKP\controllers\grid\GridHandler;
+use PKP\controllers\grid\GridRow;
 use PKP\linkAction\LinkAction;
 use PKP\linkAction\request\AjaxModal;
 

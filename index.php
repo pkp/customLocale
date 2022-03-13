@@ -10,5 +10,6 @@
  *
  */
 
-require_once 'CustomLocalePlugin.inc.php';
+use APP\plugins\generic\customLocale\CustomLocalePlugin;
+
 return new CustomLocalePlugin();

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file CustomLocaleHandler.inc.php
+ * @file CustomLocaleHandler.php
  *
  * Copyright (c) 2016-2022 Language Science Press
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
@@ -9,10 +9,16 @@
  * @class CustomLocaleHandler
  */
 
+namespace APP\plugins\generic\customLocale;
+
 use APP\handler\Handler;
 use Gettext\Translation;
 use PKP\core\PKPRequest;
 use PKP\i18n\translation\LocaleFile;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use RecursiveRegexIterator;
+use RegexIterator;
 
 class CustomLocaleHandler extends Handler
 {

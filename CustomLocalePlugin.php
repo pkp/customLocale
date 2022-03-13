@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file CustomLocalePlugin.inc.php
+ * @file CustomLocalePlugin.php
  *
  * Copyright (c) 2016-2022 Language Science Press
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
@@ -9,8 +9,12 @@
  * @class CustomLocalePlugin
  */
 
+namespace APP\plugins\generic\customLocale;
+
 use APP\core\Application;
+use APP\plugins\generic\customLocale\controllers\grid\CustomLocaleGridHandler;
 use APP\template\TemplateManager;
+use Exception;
 use Gettext\Generator\PoGenerator;
 use Gettext\Translations;
 use PKP\core\PKPApplication;
@@ -22,6 +26,11 @@ use PKP\linkAction\LinkAction;
 use PKP\linkAction\request\RedirectAction;
 use PKP\plugins\GenericPlugin;
 use PKP\plugins\HookRegistry;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use RecursiveRegexIterator;
+use RegexIterator;
+use SplFileObject;
 
 class CustomLocalePlugin extends GenericPlugin
 {
@@ -82,7 +91,6 @@ class CustomLocalePlugin extends GenericPlugin
             }
 
             // Allow the custom locale grid handler to get the plugin object
-            import($component);
             CustomLocaleGridHandler::setPlugin($this);
             return true;
         });
@@ -101,7 +109,6 @@ class CustomLocalePlugin extends GenericPlugin
 
             if ([$page, $op, $tail] === ['management', 'settings', 'printCustomLocaleChanges']) {
                 $op = 'printCustomLocaleChanges';
-                $this->import('CustomLocaleHandler');
                 define('HANDLER_CLASS', CustomLocaleHandler::class);
             }
 
@@ -284,6 +291,8 @@ class CustomLocalePlugin extends GenericPlugin
             }
 
             $success = true;
+        } catch (Exception $e) {
+            error_log("An exception happened while upgrading the customLocale plugin.\n" . $e);
         } finally {
             $lockFile->flock(LOCK_UN);
             $lockFile = null;
@@ -308,4 +317,8 @@ class CustomLocalePlugin extends GenericPlugin
     {
         return __('plugins.generic.customLocale.description');
     }
+}
+
+if (!PKP_STRICT_MODE) {
+    class_alias('\APP\plugins\generic\customLocale\CustomLocalePlugin', '\CustomLocalePlugin');
 }

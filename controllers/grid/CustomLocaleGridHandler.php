@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file controllers/grid/CustomLocaleGridHandler.inc.php
+ * @file controllers/grid/CustomLocaleGridHandler.php
  *
  * Copyright (c) 2016-2022 Language Science Press
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
@@ -9,7 +9,12 @@
  * @class CustomLocaleGridHandler
  */
 
+namespace APP\plugins\generic\customLocale\controllers\grid;
+
 use APP\notification\NotificationManager;
+use APP\plugins\generic\customLocale\classes\CustomLocale;
+use APP\plugins\generic\customLocale\controllers\grid\form\LocaleFileForm;
+use APP\plugins\generic\customLocale\CustomLocalePlugin;
 use Gettext\Generator\PoGenerator;
 use Gettext\Translation;
 use Gettext\Translations;
@@ -22,9 +27,6 @@ use PKP\file\ContextFileManager;
 use PKP\i18n\translation\LocaleFile;
 use PKP\security\authorization\ContextAccessPolicy;
 use PKP\security\Role;
-
-import('plugins.generic.customLocale.controllers.grid.CustomLocaleGridCellProvider');
-import('plugins.generic.customLocale.classes.CustomLocale');
 
 class CustomLocaleGridHandler extends GridHandler
 {
@@ -60,7 +62,6 @@ class CustomLocaleGridHandler extends GridHandler
         $this->setupTemplate($request);
 
         // Create and present the edit form
-        import('plugins.generic.customLocale.controllers.grid.form.LocaleFileForm');
         $localeFileForm = new LocaleFileForm(self::$plugin, $args['locale']);
         $localeFileForm->initData();
         return new JSONMessage(true, $localeFileForm->fetch($request));
@@ -78,7 +79,6 @@ class CustomLocaleGridHandler extends GridHandler
             $context = $request->getContext();
             $this->setupTemplate($request);
             // Create and present the edit form
-            import('plugins.generic.customLocale.controllers.grid.form.LocaleFileForm');
             $localeFileForm = new LocaleFileForm(self::$plugin, $locale);
             $localeFileForm->initData();
             return new JSONMessage(true, $localeFileForm->fetch($request));
@@ -170,4 +170,8 @@ class CustomLocaleGridHandler extends GridHandler
     {
         return [new PagingFeature()];
     }
+}
+
+if (!PKP_STRICT_MODE) {
+    class_alias('\APP\plugins\generic\customLocale\controllers\grid\CustomLocaleGridHandler', '\CustomLocaleGridHandler');
 }

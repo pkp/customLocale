@@ -1,13 +1,15 @@
 <?php
 
 /**
- * @file classes/CustomLocale.inc.php
+ * @file classes/CustomLocale.php
  *
  * Copyright (c) 2016-2022 Language Science Press
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class CustomLocale
  */
+
+namespace APP\plugins\generic\customLocale\classes;
 
 use PKP\core\DataObject;
 
