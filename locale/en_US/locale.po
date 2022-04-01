@@ -32,7 +32,7 @@ msgid "plugins.generic.customLocale.customize"
 msgstr "Customize"
 
 msgid "plugins.generic.customLocale.printChanges"
-msgstr "Download a file that lists all the customizations you made."
+msgstr "Download changes."
 
 msgid "plugins.generic.customLocale.file.editHeader"
 msgstr "Customize locale keys"
