@@ -241,6 +241,14 @@ class CustomLocalePlugin extends GenericPlugin
     {
         return __('plugins.generic.customLocale.description');
     }
+
+    /**
+     * @copydoc PKPPlugin::getSeq()
+     */
+    public function getSeq(): int
+    {
+        return -1;
+    }
 }
 
 if (!PKP_STRICT_MODE) {
