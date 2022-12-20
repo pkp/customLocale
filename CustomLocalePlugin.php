@@ -23,7 +23,7 @@ use PKP\i18n\translation\Translator;
 use PKP\linkAction\LinkAction;
 use PKP\linkAction\request\RedirectAction;
 use PKP\plugins\GenericPlugin;
-use PKP\plugins\HookRegistry;
+use PKP\plugins\Hook;
 
 class CustomLocalePlugin extends GenericPlugin
 {
@@ -77,7 +77,7 @@ class CustomLocalePlugin extends GenericPlugin
      */
     public function setupGridHandler(): void
     {
-        HookRegistry::register('LoadComponentHandler', function (string $hookName, array $args): bool {
+        Hook::add('LoadComponentHandler', function (string $hookName, array $args): bool {
             $component = $args[0];
             if ($component !== 'plugins.generic.customLocale.controllers.grid.CustomLocaleGridHandler') {
                 return false;
@@ -94,7 +94,7 @@ class CustomLocalePlugin extends GenericPlugin
      */
     public function setupDownloadChangesEndpoint(): void
     {
-        HookRegistry::register('LoadHandler', function (string $hookName, array $args): bool {
+        Hook::add('LoadHandler', function (string $hookName, array $args): bool {
             $request = $this->getRequest();
             // Get url path components by reference
             [&$page, &$op] = $args;
@@ -114,7 +114,7 @@ class CustomLocalePlugin extends GenericPlugin
      */
     public function callbackShowWebsiteSettingsTabs(): void
     {
-        HookRegistry::register('Template::Settings::website', function (string $hookName, array $args): bool {
+        Hook::add('Template::Settings::website', function (string $hookName, array $args): bool {
             [, $templateMgr, &$output] = $args;
             $output .= $templateMgr->fetch($this->getTemplateResource('customLocaleTab.tpl'));
             // Permit other plugins to continue interacting with this hook
