@@ -185,5 +185,12 @@ class CustomLocalePlugin extends GenericPlugin {
 		// Permit other plugins to continue interacting with this hook
 		return false;
 	}
+
+	/**
+	 * @copydoc PKPPlugin::getSeq()
+	 */
+	function getSeq() {
+		return -1;
+	}
 }
 
