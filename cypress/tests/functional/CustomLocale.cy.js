@@ -20,10 +20,10 @@ describe('Custom Locale plugin tests', function() {
 		cy.get('div:contains(\'The plugin "Custom Locale Plugin" has been enabled.\')');
 		cy.get('tr[id="component-grid-settings-plugins-settingsplugingrid-category-generic-row-customlocaleplugin"] a.show_extras').click();
 		cy.get('a[id^="component-grid-settings-plugins-settingsplugingrid-category-generic-row-customlocaleplugin-customize-button-"').click();
-		
+
 		// FIXME: The new settings tab handler doesn't jump right to the correct tab.
 		cy.get('button#customLocale-button').click();
-		cy.get('span.label:contains("en_US")').parent().parent().parent().contains('Edit').click();
+		cy.get('a[href*=en_US]:contains("Edit")').click();
 		cy.wait(1000); // Form init
 		cy.get('input.pkpSearch__input').type('user.affiliation');
 		cy.get('button.pkpButton:contains("Search")').click();

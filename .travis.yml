@@ -37,7 +37,7 @@ install:
   - ln -s ${TRAVIS_BUILD_DIR} ~/${APPLICATION}/plugins/generic/customLocale
 
 script:
-  - $(npm bin)/cypress run --headless --browser chrome --config '{"specPattern":["cypress/tests/data/10-Installation.cy.js","cypress/tests/data/20-CreateContext.cy.js","plugins/generic/customLocale/cypress/tests/**/*.cy.{js,jsx,ts,tsx}"]}'
+  - $(npm bin)/cypress run --headless --browser chrome --config '{"specPattern":["cypress/tests/data/{10-Installation,20-CreateContext}.cy.js","plugins/generic/customLocale/cypress/tests/**/*.cy.{js,jsx,ts,tsx}"]}'
 
 after_failure:
   - cat error.log
