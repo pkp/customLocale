@@ -32,7 +32,7 @@ class CustomLocaleForm extends Form {
 	/**
 	 * @copydoc Form::fetch()
 	 */
-	function fetch($request, $template = null) {
+	function fetch($request, $template = null, $display = false) {
 
 		// Set custom template.
 		if (!is_null($template)) $this->_template = $template;
@@ -47,7 +47,7 @@ class CustomLocaleForm extends Form {
 			'masterLocale' => MASTER_LOCALE,
 		));
 
-		return $templateMgr->display($this->_template);
+		return $templateMgr->fetch($request, $this->_template, $display);
 	}
 }
 

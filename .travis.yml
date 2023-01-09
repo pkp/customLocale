@@ -1,9 +1,11 @@
 # @file
 # .travis.yml - PKP Plugins Integration
 
+dist: bionic
 language: php
 
 addons:
+  postgresql: "9.5"
   apt:
     update: true
 

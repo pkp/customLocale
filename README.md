@@ -1,6 +1,8 @@
 - Custom Locale Plugin
-- Version: 1.1.0
+- Version: (see version.xml)
 - Author: Carola Fanselow (updates by Alec Smecher, Erik Hanson)
+
+[![Build Status](https://travis-ci.org/pkp/customLocale.svg?branch=stable-3_3_0)](https://travis-ci.org/pkp/customLocale)
 
 About
 -----
