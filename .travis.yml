@@ -6,9 +6,13 @@ os: linux
 language: php
 
 addons:
+  chrome: beta
   postgresql: "9.5"
   apt:
     update: true
+    packages:
+      - libvulkan1
+      - libu2f-udev
 
 sudo: required
 
@@ -37,7 +41,7 @@ install:
   - ln -s ${TRAVIS_BUILD_DIR} ~/${APPLICATION}/plugins/generic/customLocale
 
 script:
-  - $(npm bin)/cypress run --headless --browser chrome --config '{"specPattern":["cypress/tests/data/{10-Installation,20-CreateContext}.cy.js","plugins/generic/customLocale/cypress/tests/**/*.cy.{js,jsx,ts,tsx}"]}'
+  - $(npm bin)/cypress run --headless --browser chrome --config '{"specPattern":["cypress/tests/data/10-ApplicationSetup/{10-Installation,20-CreateContext}.cy.js","plugins/generic/customLocale/cypress/tests/functional/*.cy.{js,jsx,ts,tsx}"]}'
 
 after_failure:
   - cat error.log
