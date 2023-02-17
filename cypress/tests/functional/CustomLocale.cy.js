@@ -23,7 +23,7 @@ describe('Custom Locale plugin tests', function() {
 
 		// FIXME: The new settings tab handler doesn't jump right to the correct tab.
 		cy.get('button#customLocale-button').click();
-		cy.get('a[href*=en_US]:contains("Edit")').click();
+		cy.get('a[href*=en]:contains("Edit")').click();
 		cy.wait(1000); // Form init
 		cy.get('input.pkpSearch__input').type('user.affiliation');
 		cy.get('button.pkpButton:contains("Search")').click();
@@ -38,6 +38,6 @@ describe('Custom Locale plugin tests', function() {
 		cy.get('.app__userNav a:contains("Edit Profile")').click({ force: true }); // Force workaround for lack of .hover() in Cypress
 		cy.wait(5000); // Delay to ensure cache refresh
 		cy.get('a:contains("Contact")').click();
-		cy.get('label[for^="affiliation-en_US"]:contains("Floog Bleem")');
+		cy.get('label[for^="affiliation-en"]:contains("Floog Bleem")');
 	});
 });
