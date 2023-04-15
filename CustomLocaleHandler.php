@@ -48,10 +48,10 @@ class CustomLocaleHandler extends Handler
 
             $locale = explode('/', substr($localeFile, strlen($customLocalePath) + 1))[0];
             $translator = CustomLocalePlugin::getTranslator($locale);
-            echo "${locale}\n\n";
+            echo "{$locale}\n\n";
             foreach ($customTranslations as $translation) {
                 $localeKey = $translation->getOriginal();
-                echo __('common.id') . ": ${localeKey}"
+                echo __('common.id') . ": {$localeKey}"
                     . "\n" . __('plugins.generic.customLocale.file.reference') . ": {$translator->getSingular($localeKey)}"
                     . "\n" . __('plugins.generic.customLocale.file.custom') . ": {$translation->getTranslation()}\n\n";
             }

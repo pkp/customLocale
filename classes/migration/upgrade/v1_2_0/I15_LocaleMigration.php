@@ -74,7 +74,7 @@ class I15_LocaleMigration extends Migration
                 }
 
                 // Attempts to load existing translations, otherwise create a new set
-                $customFilePath = $customLocalePath . "/${locale}/locale.po";
+                $customFilePath = $customLocalePath . "/{$locale}/locale.po";
                 $translationsByLocale[$locale] ??= file_exists($customFilePath)
                     ? LocaleFile::loadTranslations($customFilePath)
                     : Translations::create(null, $locale);
@@ -88,11 +88,11 @@ class I15_LocaleMigration extends Migration
             $contextFileManager = CustomLocalePlugin::getContextFileManager();
             // Generates the updated locale files
             foreach ($translationsByLocale as $locale => $translations) {
-                $basePath = "${customLocalePath}/${locale}";
+                $basePath = "{$customLocalePath}/{$locale}";
                 if (!is_dir($basePath)) {
                     $contextFileManager->mkdir($basePath);
                 }
-                $customFilePath = "${basePath}/locale.po";
+                $customFilePath = "{$basePath}/locale.po";
                 if (!(new PoGenerator())->generateFile($translations, $customFilePath)) {
                     throw new Exception('Failed to serialize translations');
                 }

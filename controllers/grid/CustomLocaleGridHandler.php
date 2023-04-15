@@ -84,7 +84,7 @@ class CustomLocaleGridHandler extends GridHandler
 
         // save changes
         $customLocalePath = CustomLocalePlugin::getStoragePath();
-        $customFilePath = "${customLocalePath}/${locale}/locale.po";
+        $customFilePath = "{$customLocalePath}/{$locale}/locale.po";
         $translator = CustomLocalePlugin::getTranslator($locale);
         $translations = file_exists($customFilePath)
             ? LocaleFile::loadTranslations($customFilePath)
