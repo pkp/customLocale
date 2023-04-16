@@ -23,15 +23,15 @@ describe('Custom Locale plugin tests', function() {
 
 		// FIXME: The new settings tab handler doesn't jump right to the correct tab.
 		cy.get('button#customLocale-button').click();
-		cy.get('a[href*=en]:contains("Edit")').click();
+		cy.get('#customLocale a[href$=en]:contains("Edit")').click();
 		cy.wait(1000); // Form init
-		cy.get('input.pkpSearch__input').type('user.affiliation');
-		cy.get('button.pkpButton:contains("Search")').click();
-		cy.get('table.customLocale__cellTable').should('have.length', 3)
-		cy.get('td input[name="changes[user.affiliation]"]').type('Floog Bleem', {delay: 0});
-		cy.get('button:contains("Save and continue")').click();
+		cy.get('#localeFilesForm input.pkpSearch__input').type('user.affiliation');
+		cy.get('#localeFilesForm button.pkpButton:contains("Search")').click();
+		cy.get('#localeFilesForm table.customLocale__cellTable').should('have.length', 3)
+		cy.get('#localeFilesForm td input[name="changes[user.affiliation]"]').type('Floog Bleem', {delay: 0});
+		cy.get('#localeFilesForm button:contains("Save and continue")').click();
 		cy.waitJQuery();
-		cy.get('a:contains("Cancel")').click();
+		cy.get('#localeFilesForm a:contains("Cancel")').click();
 
 		// Check that the overridden locale key works.
 		cy.get('.app__userNav button').click();
