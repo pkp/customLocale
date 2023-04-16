@@ -8,6 +8,7 @@
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class I15_LocaleMigration
+ *
  * @brief Update the locale files to the new structure (single file per locale).
  */
 

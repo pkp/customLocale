@@ -220,8 +220,7 @@ class CustomLocalePlugin extends GenericPlugin
     {
         try {
             (new I15_LocaleMigration())->up();
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             error_log("An exception happened while upgrading the customLocale plugin.\n" . $e);
         }
     }
