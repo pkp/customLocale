@@ -16,6 +16,7 @@ use PKP\controllers\grid\GridCellProvider;
 use PKP\controllers\grid\GridColumn;
 use PKP\controllers\grid\GridHandler;
 use PKP\controllers\grid\GridRow;
+use PKP\core\PKPRequest;
 use PKP\linkAction\LinkAction;
 use PKP\linkAction\request\AjaxModal;
 
