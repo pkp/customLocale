@@ -237,7 +237,11 @@ class CustomLocaleGridHandler extends GridHandler {
 
 		$locales = $request->getContext()->getSupportedLocaleNames();
 		$locale = $request->getUserVar('locale');
-		if (!in_array($locale, array_keys($locales))) $locale = LOCALE_DEFAULT;
+		// consider app locale as well
+		if (!in_array($locale, array_keys($locales))) {
+			$locale = AppLocale::getLocale();
+			if (!in_array($locale, array_keys($locales))) $locale = LOCALE_DEFAULT;
+		}
 
 		$searchField = $request->getUserVar('searchField');
 		$searchMatch = $request->getUserVar('searchMatch');
