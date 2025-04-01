@@ -3,7 +3,7 @@
 /**
  * @file CustomLocalePlugin.php
  *
- * Copyright (c) 2016-2022 Language Science Press
+ * Copyright (c) 2016-2025 Language Science Press
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class CustomLocalePlugin
@@ -12,7 +12,7 @@
 namespace APP\plugins\generic\customLocale;
 
 use APP\core\Application;
-use APP\plugins\generic\customLocale\classes\migration\upgrade\v1_2_0\I15_LocaleMigration;
+use APP\plugins\generic\customLocale\classes\migration\upgrade\v1_2_0_3\I23_LocaleMigration;
 use APP\plugins\generic\customLocale\controllers\grid\CustomLocaleGridHandler;
 use APP\template\TemplateManager;
 use Exception;
@@ -219,7 +219,7 @@ class CustomLocalePlugin extends GenericPlugin
     public function upgrade(): void
     {
         try {
-            (new I15_LocaleMigration())->up();
+            (new I23_LocaleMigration($this))->up();
         } catch (Exception $e) {
             error_log("An exception happened while upgrading the customLocale plugin.\n" . $e);
         }
