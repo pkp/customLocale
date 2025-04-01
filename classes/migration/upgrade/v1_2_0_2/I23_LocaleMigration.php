@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file classes/migration/upgrade/v1_2_0_3/I23_LocaleMigration.php
+ * @file classes/migration/upgrade/v1_2_0_2/I23_LocaleMigration.php
  *
  * Copyright (c) 2014-2025 Simon Fraser University
  * Copyright (c) 2000-2025 John Willinsky
@@ -14,7 +14,7 @@
  * @see https://github.com/pkp/customLocale/issues/23
  */
 
-namespace APP\plugins\generic\customLocale\classes\migration\upgrade\v1_2_0_3;
+namespace APP\plugins\generic\customLocale\classes\migration\upgrade\v1_2_0_2;
 
 use APP\core\Application;
 use APP\plugins\generic\customLocale\CustomLocalePlugin;
@@ -44,7 +44,7 @@ class I23_LocaleMigration extends Migration
     {
         // Ensure this process is executed only once (re-running will just cause a performance penalty though)
         $lastMigration = $this->plugin->getSetting(Application::CONTEXT_SITE, 'lastMigration');
-        if (version_compare($lastMigration ?: '0', '1.2.0.3', '>=')) {
+        if (version_compare($lastMigration ?: '0', '1.2.0.2', '>=')) {
             return;
         }
 

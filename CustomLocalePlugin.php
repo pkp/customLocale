@@ -12,7 +12,7 @@
 namespace APP\plugins\generic\customLocale;
 
 use APP\core\Application;
-use APP\plugins\generic\customLocale\classes\migration\upgrade\v1_2_0_3\I23_LocaleMigration;
+use APP\plugins\generic\customLocale\classes\migration\upgrade\v1_2_0_2\I23_LocaleMigration;
 use APP\plugins\generic\customLocale\controllers\grid\CustomLocaleGridHandler;
 use APP\template\TemplateManager;
 use Exception;
