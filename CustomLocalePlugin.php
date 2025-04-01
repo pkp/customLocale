@@ -56,7 +56,9 @@ class CustomLocalePlugin extends GenericPlugin
      */
     public function setupLocalizationOverriding(): void
     {
-        if (is_dir($path = static::getStoragePath())) Locale::registerPath($path, PHP_INT_MAX);
+        if (is_dir($path = static::getStoragePath())) {
+            Locale::registerPath($path, PHP_INT_MAX);
+        }
     }
 
     /**
@@ -80,12 +82,12 @@ class CustomLocalePlugin extends GenericPlugin
         Hook::add('LoadComponentHandler', function (string $hookName, array $args): bool {
             $component = $args[0];
             if ($component !== 'plugins.generic.customLocale.controllers.grid.CustomLocaleGridHandler') {
-                return false;
+                return Hook::CONTINUE;
             }
 
             // Allow the custom locale grid handler to get the plugin object
             CustomLocaleGridHandler::setPlugin($this);
-            return true;
+            return Hook::ABORT;
         });
     }
 
@@ -105,7 +107,7 @@ class CustomLocalePlugin extends GenericPlugin
                 define('HANDLER_CLASS', CustomLocaleHandler::class);
             }
 
-            return false;
+            return Hook::CONTINUE;
         });
     }
 
@@ -118,7 +120,7 @@ class CustomLocalePlugin extends GenericPlugin
             [, $templateMgr, &$output] = $args;
             $output .= $templateMgr->fetch($this->getTemplateResource('customLocaleTab.tpl'));
             // Permit other plugins to continue interacting with this hook
-            return false;
+            return Hook::CONTINUE;
         });
     }
 
@@ -242,7 +244,7 @@ class CustomLocalePlugin extends GenericPlugin
     }
 
     /**
-     * @copydoc PKPPlugin::getSeq()
+     * @copydoc Plugin::getSeq()
      */
     public function getSeq(): int
     {
