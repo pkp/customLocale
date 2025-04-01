@@ -43,71 +43,66 @@ class I23_LocaleMigration extends Migration
     public function up(): void
     {
         // Ensure this process is executed only once (re-running will just cause a performance penalty though)
-        $lastMigration = $this->plugin->getSetting(Application::CONTEXT_SITE, 'lastMigration');
+        $lastMigration = $this->plugin->getSetting($this->plugin->getCurrentContextId(), 'lastMigration');
         if (version_compare($lastMigration ?: '0', '1.2.0.2', '>=')) {
             return;
         }
 
-        foreach (Application::getContextDAO()->getAll()->toIterator() as $context) {
-            $contextFileManager = new ContextFileManager($context->getId());
-            $customLocalePath = realpath($contextFileManager->getBasePath() . CustomLocalePlugin::LOCALE_FOLDER);
-            if (!$customLocalePath) {
-                continue;
+        // This will retrieve the path for the current context, eventually all contexts will be upgraded
+        $customLocalePath = CustomLocalePlugin::getStoragePath();
+        // Check if old lock file from a previous migration attempt exists and remove it
+        $oldLockFilePath = $customLocalePath . '/migration-1_1_0.lock';
+        if (file_exists($oldLockFilePath)) {
+            unlink($oldLockFilePath);
+        }
+
+        // Get all locale files in the custom locale directory
+        $directory = new RecursiveDirectoryIterator($customLocalePath);
+        $iterator = new RecursiveIteratorIterator($directory);
+        $regex = new RegexIterator($iterator, '/^.+\.po$/i', RecursiveRegexIterator::GET_MATCH);
+        $files = array_keys(iterator_to_array($regex));
+        /** @var Translations[] */
+        $translationsByLocale = [];
+        $pathsToUnlink = [];
+
+        foreach ($files as $path) {
+            if ($this->processLocaleFile($customLocalePath, $path, $translationsByLocale)) {
+                // Keeps track of the locale files that we merged, so we can remove them later
+                $pathsToUnlink[] = $path;
+            }
+        }
+
+        $contextFileManager = CustomLocalePlugin::getContextFileManager();
+        // Generates the merged and unified locale files
+        foreach ($translationsByLocale as $locale => $translations) {
+            $basePath = "{$customLocalePath}/{$locale}";
+            if (!is_dir($basePath)) {
+                $contextFileManager->mkdir($basePath);
             }
 
-            // Check if old lock file from a previous migration attempt exists and remove it
-            $oldLockFilePath = $customLocalePath . '/migration-1_1_0.lock';
-            if (file_exists($oldLockFilePath)) {
-                unlink($oldLockFilePath);
+            $customFilePath = "{$basePath}/locale.po";
+            if (!(new PoGenerator())->generateFile($translations, $customFilePath)) {
+                throw new Exception("Failed to serialize translations to {$customFilePath}");
             }
+        }
 
-            // Get all locale files in the custom locale directory
-            $directory = new RecursiveDirectoryIterator($customLocalePath);
-            $iterator = new RecursiveIteratorIterator($directory);
-            $regex = new RegexIterator($iterator, '/^.+\.po$/i', RecursiveRegexIterator::GET_MATCH);
-            $files = array_keys(iterator_to_array($regex));
-            /** @var Translations[] */
-            $translationsByLocale = [];
-            $pathsToUnlink = [];
-
-            foreach ($files as $path) {
-                if ($this->processLocaleFile($customLocalePath, $path, $translationsByLocale)) {
-                    // Keeps track of the locale files that we merged, so we can remove them later
-                    $pathsToUnlink[] = $path;
-                }
+        // Removes locale files which were merged
+        foreach ($pathsToUnlink as $path) {
+            if (!unlink($path)) {
+                throw new Exception("Failed to remove locale file {$path}");
             }
+        }
 
-            // Generates the merged and unified locale files
-            foreach ($translationsByLocale as $locale => $translations) {
-                $basePath = "{$customLocalePath}/{$locale}";
-                if (!is_dir($basePath)) {
-                    $contextFileManager->mkdir($basePath);
-                }
-
-                $customFilePath = "{$basePath}/locale.po";
-                if (!(new PoGenerator())->generateFile($translations, $customFilePath)) {
-                    throw new Exception("Failed to serialize translations to {$customFilePath}");
-                }
-            }
-
-            // Removes locale files which were merged
-            foreach ($pathsToUnlink as $path) {
-                if (!unlink($path)) {
-                    throw new Exception("Failed to remove locale file {$path}");
-                }
-            }
-
-            // Attempts to remove empty folders
-            $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($customLocalePath), RecursiveIteratorIterator::CHILD_FIRST);
-            foreach ($files as $file) {
-                if (!in_array($file->getBasename(), ['.', '..']) && $file->isDir()) {
-                    @rmdir($file->getPathName());
-                }
+        // Attempts to remove empty folders
+        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($customLocalePath), RecursiveIteratorIterator::CHILD_FIRST);
+        foreach ($files as $file) {
+            if (!in_array($file->getBasename(), ['.', '..']) && $file->isDir()) {
+                @rmdir($file->getPathName());
             }
         }
 
         // Setup the last migration
-        $this->plugin->updateSetting(Application::CONTEXT_SITE, 'lastMigration', $this->plugin->getCurrentVersion()->getVersionString());
+        $this->plugin->updateSetting($this->plugin->getCurrentContextId(), 'lastMigration', $this->plugin->getCurrentVersion()->getVersionString());
     }
 
     /**
