@@ -71,7 +71,7 @@ class I23_LocaleMigration extends Migration
             $pathsToUnlink = [];
 
             foreach ($files as $path) {
-                if ($translations = $this->processLocaleFile($customLocalePath, $path, $translationsByLocale)) {
+                if ($this->processLocaleFile($customLocalePath, $path, $translationsByLocale)) {
                     // Keeps track of the locale files that we merged, so we can remove them later
                     $pathsToUnlink[] = $path;
                 }
