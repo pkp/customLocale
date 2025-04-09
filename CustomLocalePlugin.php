@@ -190,7 +190,7 @@ class CustomLocalePlugin extends GenericPlugin
                     null,
                     'management',
                     'settings',
-                    'website',
+                    ['website'],
                     ['uid' => uniqid()], // Force reload
                     'customLocale' // Anchor for tab
                 )),
@@ -204,7 +204,7 @@ class CustomLocalePlugin extends GenericPlugin
                     null,
                     'management',
                     'settings',
-                    'printCustomLocaleChanges',
+                    ['printCustomLocaleChanges'],
                     ['uid' => uniqid()] // Force reload
                 )),
                 __('plugins.generic.customLocale.printChanges')
