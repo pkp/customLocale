@@ -20,7 +20,7 @@ msgstr "Custom Locale Plugin"
 msgid "plugins.generic.customLocale.description"
 msgstr ""
 "This plugin enables customization of the default user interface text used by "
-"OJS and OMP."
+"OJS, OPS and OMP."
 
 msgid "plugins.generic.customLocale.saveAndContinue"
 msgstr "Save and continue"
@@ -32,7 +32,7 @@ msgid "plugins.generic.customLocale.customize"
 msgstr "Customize"
 
 msgid "plugins.generic.customLocale.printChanges"
-msgstr "Download changes"
+msgstr "Download Changes"
 
 msgid "plugins.generic.customLocale.file.editHeader"
 msgstr "Customize locale keys"
