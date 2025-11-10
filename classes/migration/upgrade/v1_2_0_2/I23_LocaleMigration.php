@@ -16,14 +16,12 @@
 
 namespace APP\plugins\generic\customLocale\classes\migration\upgrade\v1_2_0_2;
 
-use APP\core\Application;
 use APP\plugins\generic\customLocale\CustomLocalePlugin;
 use Exception;
 use Gettext\Generator\PoGenerator;
 use Gettext\Translations;
 use Illuminate\Database\Migrations\Migration;
 use PKP\facades\Locale;
-use PKP\file\ContextFileManager;
 use PKP\i18n\translation\LocaleFile;
 use PKP\install\DowngradeNotSupportedException;
 use RecursiveDirectoryIterator;
@@ -61,7 +59,7 @@ class I23_LocaleMigration extends Migration
         $iterator = new RecursiveIteratorIterator($directory);
         $regex = new RegexIterator($iterator, '/^.+\.po$/i', RecursiveRegexIterator::GET_MATCH);
         $files = array_keys(iterator_to_array($regex));
-        /** @var Translations[] */
+        /** @var Translations[] $translationsByLocale */
         $translationsByLocale = [];
         $pathsToUnlink = [];
 
