@@ -251,7 +251,3 @@ class CustomLocalePlugin extends GenericPlugin
         return -1;
     }
 }
-
-if (!PKP_STRICT_MODE) {
-    class_alias('\APP\plugins\generic\customLocale\CustomLocalePlugin', '\CustomLocalePlugin');
-}
