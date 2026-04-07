@@ -80,13 +80,15 @@ class CustomLocalePlugin extends GenericPlugin
     public function setupGridHandler(): void
     {
         Hook::add('LoadComponentHandler', function (string $hookName, array $args): bool {
-            $component = $args[0];
+            $component = &$args[0];
+            $componentInstance = &$args[2];
             if ($component !== 'plugins.generic.customLocale.controllers.grid.CustomLocaleGridHandler') {
                 return Hook::CONTINUE;
             }
 
-            // Allow the custom locale grid handler to get the plugin object
+            // Instantiate the handler and give it access to the plugin object
             CustomLocaleGridHandler::setPlugin($this);
+            $componentInstance = new CustomLocaleGridHandler();
             return Hook::ABORT;
         });
     }
@@ -99,12 +101,12 @@ class CustomLocalePlugin extends GenericPlugin
         Hook::add('LoadHandler', function (string $hookName, array $args): bool {
             $request = $this->getRequest();
             // Get url path components by reference
-            [&$page, &$op] = $args;
+            [&$page, &$op, &$sourceFile, &$handler] = $args;
             $tail = implode('/', $request->getRequestedArgs());
 
             if ([$page, $op, $tail] === ['management', 'settings', 'printCustomLocaleChanges']) {
                 $op = 'printCustomLocaleChanges';
-                define('HANDLER_CLASS', CustomLocaleHandler::class);
+                $handler = new CustomLocaleHandler();
             }
 
             return Hook::CONTINUE;
@@ -197,19 +199,6 @@ class CustomLocalePlugin extends GenericPlugin
                     'customLocale' // Anchor for tab
                 )),
                 __('plugins.generic.customLocale.customize')
-            ),
-            new LinkAction(
-                'printChanges',
-                new RedirectAction($dispatcher->url(
-                    $request,
-                    PKPApplication::ROUTE_PAGE,
-                    null,
-                    'management',
-                    'settings',
-                    ['printCustomLocaleChanges'],
-                    ['uid' => uniqid()] // Force reload
-                )),
-                __('plugins.generic.customLocale.printChanges')
             )
         );
         return $actions;

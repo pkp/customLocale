@@ -19,15 +19,6 @@
 				</span>
 				<div class="pkpHeader__actions">
 					{* SEARCH BOX *}
-					<div>
-						<label>
-							<input
-								type="checkbox"
-								v-model="onlyModified"
-							/>
-							{translate key="plugins.generic.customLocale.file.onlyModified"}
-						</label>
-					</div>
 					<div class="pkpSearch">
 						<label>
 							<span class="-screenReader">{translate key="common.search"}</span>
@@ -54,6 +45,36 @@
 						</button>
 					</div>
 					<button class="pkpButton" @click.prevent="search">{translate key="common.search"}</button>
+					<div class="customLocale__searchOptions customLocale__searchOptionsRow">
+						<label>
+							<input
+								type="checkbox"
+								v-model="onlyModified"
+							/>
+							{translate key="plugins.generic.customLocale.file.onlyModified"}
+						</label>
+						<label>
+							<input
+								type="checkbox"
+								v-model="searchKeysOnly"
+							/>
+							{translate key="plugins.generic.customLocale.file.searchKeysOnly"}
+						</label>
+						<label>
+							<input
+								type="checkbox"
+								v-model="searchValuesOnly"
+							/>
+							{translate key="plugins.generic.customLocale.file.searchValuesOnly"}
+						</label>
+						<label>
+							<input
+								type="checkbox"
+								v-model="exactMatch"
+							/>
+							{translate key="plugins.generic.customLocale.file.exactMatch"}
+						</label>
+					</div>
 				</div>
 				<div class="customLocale__headerDescription">
 					{translate key="plugins.generic.customLocale.file.edit" filename=$name|escape}
@@ -178,12 +199,11 @@
 			// Attach the form handler.
 			$('#localeFilesForm').pkpHandler('$.pkp.controllers.form.AjaxFormHandler');
 		{rdelim});
-		{if $localeContents}
-			customLocalesApp.data.edited = {$localeContents|json_encode};
-		{else}
-			customLocalesApp.data.edited = {ldelim}{rdelim};
-		{/if}
-		customLocalesApp.data.localeKeysMaster = {$referenceLocaleContents|json_encode};
-		new pkp.Vue(customLocalesApp);
+		var customLocaleServerData = {ldelim}
+			edited: {if $localeContents}{$localeContents|json_encode}{else}{ldelim}{rdelim}{/if},
+			localeKeysMaster: {$referenceLocaleContents|json_encode}
+		{rdelim};
+		var customLocalesAppOptions = window.customLocaleAppFactory(customLocaleServerData);
+		pkp.pkpCreateVueApp(customLocalesAppOptions).mount('#customLocales');
 	</script>
 </form>

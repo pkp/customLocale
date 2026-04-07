@@ -16,6 +16,33 @@ input.valueChanged, textArea.valueChanged {
 	line-height: 1.6em;
 }
 
+#customLocales .pkpHeader__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.customLocale__searchOptions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.customLocale__searchOptions label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.customLocale__searchOptionsRow {
+    flex-basis: 100%;
+    margin-top: 0.35rem;
+    justify-content: flex-end;
+}
+
 .pkpTable td.customLocale__itemCount {
 	font-size: 12px;
 	padding: 0.5rem 1rem;
@@ -36,3 +63,62 @@ textarea.customLocale__fixedSize {
 	resize: none;
 }
 
+/* Keep clear button from changing layout width when it appears */
+#customLocales .pkpSearch {
+    position: relative;
+}
+
+#customLocales .pkpSearch .pkpSearch__input {
+    /* Reserve space for clear button on the right */
+    padding-inline-end: 2.25rem;
+}
+
+#customLocales .pkpSearch .pkpSearch__clear {
+    position: absolute;
+    top: 50%;
+    right: 0.25rem;
+    transform: translateY(-50%);
+    width: 1.75rem;
+    height: 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    line-height: 1;
+    z-index: 2;
+}
+
+#customLocales .pkpSearch .pkpSearch__clear:hover,
+#customLocales .pkpSearch .pkpSearch__clear:focus {
+    color: #006798;
+}
+
+[dir="rtl"] #customLocales .pkpSearch .pkpSearch__clear {
+    right: auto;
+    left: 0.25rem;
+}
+
+/* Center and normalize search icon button */
+#customLocales .pkpSearch .pkpSearch__icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5em;
+    height: 100%;
+    cursor: pointer;
+}
+
+/* Remove FA inline offset from pkpIcon--inline and set a stable size */
+#customLocales .pkpSearch .pkpSearch__icons .fa {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1;
+}
+
+/* Keep clear icon visually consistent with search icon */
+#customLocales .pkpSearch .pkpSearch__clear .fa {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1;
+}

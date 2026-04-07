@@ -59,3 +59,12 @@ msgstr ""
 
 msgid "plugins.generic.customLocale.file.onlyModified"
 msgstr "Only modified"
+
+msgid "plugins.generic.customLocale.file.searchKeysOnly"
+msgstr "Keys only"
+
+msgid "plugins.generic.customLocale.file.searchValuesOnly"
+msgstr "Values only"
+
+msgid "plugins.generic.customLocale.file.exactMatch"
+msgstr "Exact match"

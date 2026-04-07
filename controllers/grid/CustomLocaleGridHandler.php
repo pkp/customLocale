@@ -23,8 +23,11 @@ use PKP\controllers\grid\feature\PagingFeature;
 use PKP\controllers\grid\GridColumn;
 use PKP\controllers\grid\GridHandler;
 use PKP\core\JSONMessage;
+use PKP\core\PKPApplication;
 use PKP\core\PKPRequest;
 use PKP\i18n\translation\LocaleFile;
+use PKP\linkAction\LinkAction;
+use PKP\linkAction\request\RedirectAction;
 use PKP\security\authorization\ContextAccessPolicy;
 use PKP\security\Role;
 
@@ -72,9 +75,17 @@ class CustomLocaleGridHandler extends GridHandler
      */
     public function updateLocale(array $args, PKPRequest $request): JSONMessage
     {
-        ['locale' => $locale, 'changes' => $changes] = $args;
+        $locale = $args['locale'] ?? null;
+        $changes = $args['changes'] ?? [];
+        if (!is_array($changes)) {
+            $changes = [];
+        }
 
 	if (!$request->checkCSRF()) return new JSONMessage(false);
+
+        if (!$locale) {
+            return new JSONMessage(false);
+        }
 
         if (!count($changes)) {
             $this->setupTemplate($request);
@@ -147,6 +158,21 @@ class CustomLocaleGridHandler extends GridHandler
         $this->setTitle('plugins.generic.customLocale.customLocaleFiles');
         $this->setEmptyRowText('plugins.generic.customLocale.noneCreated');
 
+        $dispatcher = $request->getDispatcher();
+        $this->addAction(new LinkAction(
+            'printChanges',
+            new RedirectAction($dispatcher->url(
+                $request,
+                PKPApplication::ROUTE_PAGE,
+                null,
+                'management',
+                'settings',
+                ['printCustomLocaleChanges'],
+                ['uid' => uniqid()]
+            )),
+            __('plugins.generic.customLocale.printChanges')
+        ));
+
         // Columns
         $cellProvider = new CustomLocaleGridCellProvider();
         $addColumn = fn (string $id, string $title) => $this->addColumn(new GridColumn($id, $title, null, 'controllers/grid/gridCell.tpl', $cellProvider));
@@ -177,8 +203,4 @@ class CustomLocaleGridHandler extends GridHandler
     {
         return [new PagingFeature()];
     }
-}
-
-if (!PKP_STRICT_MODE) {
-    class_alias('\APP\plugins\generic\customLocale\controllers\grid\CustomLocaleGridHandler', '\CustomLocaleGridHandler');
 }
