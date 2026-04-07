@@ -37,7 +37,7 @@ msgid "plugins.generic.customLocale.customize"
 msgstr "Anpassen"
 
 msgid "plugins.generic.customLocale.printChanges"
-msgstr "Hier können Sie eine Datei downloaden, die alle Anpassungen auflistet."
+msgstr "Alle Anpassungen herunterladen."
 
 msgid "plugins.generic.customLocale.file.editHeader"
 msgstr "Regionaleinstellung anpassen"
@@ -67,3 +67,12 @@ msgstr ""
 
 msgid "plugins.generic.customLocale.file.onlyModified"
 msgstr "Nur modifizierte"
+
+msgid "plugins.generic.customLocale.file.searchKeysOnly"
+msgstr "Nur Schlüssel"
+
+msgid "plugins.generic.customLocale.file.searchValuesOnly"
+msgstr "Nur Werte"
+
+msgid "plugins.generic.customLocale.file.exactMatch"
+msgstr "Exakte Übereinstimmung"

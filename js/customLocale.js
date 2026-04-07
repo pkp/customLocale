@@ -1,21 +1,25 @@
-var customLocalesApp = {};
-$(function() {
-	customLocalesApp = {
-		el: '#customLocales',
-		data: {
-			edited: {},
-			name: '',
-			localEdited: {}, // temporarily holds edited values, both saved and new
-			localeKeysMaster: [], // master list of all keys in locale file
-			filteredKeysList: [], // filtered keys allows for paginating search results
-			currentLocaleKeys: [], // keys available on a given page
-			searchPhrase: '',
-			phraseSearched: '',
-			onlyModified: false,
-			currentPage: 0,
-			itemsPerPage: 25,
-			showAdjacentPages: 1,
-			displaySearchResults: false,
+// Exported function to create a fresh app instance with server-provided data
+window.customLocaleAppFactory = function(serverData = {}) {
+	return {
+		data() {
+			return {
+				edited: serverData.edited || {},
+				name: '',
+				localEdited: {}, // temporarily holds edited values, both saved and new
+				localeKeysMaster: serverData.localeKeysMaster || [], // master list of all keys in locale file
+				filteredKeysList: [], // filtered keys allows for paginating search results
+				currentLocaleKeys: [], // keys available on a given page
+				searchPhrase: '',
+				phraseSearched: '',
+				onlyModified: false,
+				searchKeysOnly: false,
+				searchValuesOnly: false,
+				exactMatch: false,
+				currentPage: 0,
+				itemsPerPage: 25,
+				showAdjacentPages: 1,
+				displaySearchResults: false,
+			};
 		},
 		methods: {
 			search: function() {
@@ -27,7 +31,10 @@ $(function() {
 				this.displaySearchResults = true;
 				this.currentPage = -1;
 				var filteredKeysList = [];
-				var search = new RegExp(this.searchPhrase, 'i');
+				var normalizedPhrase = (this.searchPhrase || '').toLowerCase();
+				var search = this.searchPhrase ? new RegExp(this.searchPhrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i') : null;
+				var searchInKeys = this.searchKeysOnly || (!this.searchKeysOnly && !this.searchValuesOnly);
+				var searchInValues = this.searchValuesOnly || (!this.searchKeysOnly && !this.searchValuesOnly);
 				for (var i = -1; ++i < this.localeKeysMaster.length; ) {
 					var item = {
 						localeKey: this.localeKeysMaster[i].localeKey,
@@ -35,7 +42,34 @@ $(function() {
 					};
 					var edited = this.localEdited[item.localeKey];
 					var canAdd = !this.onlyModified || edited;
-					if (canAdd && search.test(item.localeKey + item.value + (edited || ''))) {
+					if (!canAdd) {
+						continue;
+					}
+
+					if (!search) {
+						filteredKeysList.push(item);
+						continue;
+					}
+
+					var localeKey = String(item.localeKey || '');
+					var valueText = String(item.value || '');
+					var editedText = String(edited || '');
+					var keyMatch = false;
+					var valueMatch = false;
+
+					if (searchInKeys) {
+						keyMatch = this.exactMatch
+							? localeKey.toLowerCase() === normalizedPhrase
+							: search.test(localeKey);
+					}
+
+					if (searchInValues) {
+						valueMatch = this.exactMatch
+							? valueText.toLowerCase() === normalizedPhrase || editedText.toLowerCase() === normalizedPhrase
+							: search.test(valueText) || search.test(editedText);
+					}
+
+					if (keyMatch || valueMatch) {
 						filteredKeysList.push(item);
 					}
 				}
@@ -129,6 +163,16 @@ $(function() {
 				var end = newVal * this.itemsPerPage;
 				var start = end - this.itemsPerPage;
 				this.currentLocaleKeys = this.filteredKeysList.slice(start, end); // Filtering changes
+			},
+			searchKeysOnly: function(newVal) {
+				if (newVal && this.searchValuesOnly) {
+					this.searchValuesOnly = false;
+				}
+			},
+			searchValuesOnly: function(newVal) {
+				if (newVal && this.searchKeysOnly) {
+					this.searchKeysOnly = false;
+				}
 			}
 		},
 		mounted: function() {
@@ -140,4 +184,4 @@ $(function() {
 			}
 		},
 	};
-});
+};
