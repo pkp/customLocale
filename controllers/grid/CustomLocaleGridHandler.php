@@ -81,7 +81,7 @@ class CustomLocaleGridHandler extends GridHandler
             $changes = [];
         }
 
-	if (!$request->checkCSRF()) return new JSONMessage(false);
+        if (!$request->checkCSRF()) return new JSONMessage(false);
 
         if (!$locale) {
             return new JSONMessage(false);
