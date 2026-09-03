@@ -38,7 +38,7 @@ class CustomLocalePlugin extends GenericPlugin
     public function register($category, $path, $mainContextId = null): bool
     {
         $success = parent::register($category, $path, $mainContextId);
-        if (!$success || Application::isUnderMaintenance() || !$this->getEnabled()) {
+        if (!$success || Application::isUnderMaintenance() || !$this->getEnabled() || $mainContextId === null) {
             return $success;
         }
         $this->upgrade();
@@ -170,7 +170,7 @@ class CustomLocalePlugin extends GenericPlugin
     public static function getContextFileManager(): ContextFileManager
     {
         $context = Application::get()->getRequest()->getContext();
-        return new ContextFileManager($context ? $context->getId() : Application::CONTEXT_SITE);
+        return new ContextFileManager($context->getId());
     }
 
     /**
@@ -179,7 +179,7 @@ class CustomLocalePlugin extends GenericPlugin
     public function getActions($request, $actionArgs): array
     {
         $actions = parent::getActions($request, $actionArgs);
-        if (!$this->getEnabled()) {
+        if (!$this->getEnabled() || !$request->getContext()) {
             return $actions;
         }
 
