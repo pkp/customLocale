@@ -6,7 +6,7 @@
  *
  *}
 
-<form class="pkp_form" id="localeFilesForm" method="post" action="{url router=$smarty.const.ROUTE_COMPONENT component="plugins.generic.customLocale.controllers.grid.CustomLocaleGridHandler" op="updateLocale" locale=$locale key=$name anchor="localeContents"}">
+<form class="pkp_form" id="localeFilesForm" method="post" action="{url router=PKP\core\PKPApplication::ROUTE_COMPONENT component="plugins.generic.customLocale.controllers.grid.CustomLocaleGridHandler" op="updateLocale" locale=$locale key=$name anchor="localeContents"}">
 	{csrf}
 	<link rel="stylesheet" href="{$baseUrl}/plugins/generic/customLocale/css/customLocale.css" type="text/css" />
 	<div id="customLocales">
