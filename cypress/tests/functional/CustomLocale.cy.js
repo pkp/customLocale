@@ -11,7 +11,9 @@ describe('Custom Locale plugin tests', function() {
 	it('Enables and configures the plugin', function() {
 		cy.login('admin', 'admin', 'publicknowledge');
 
-		cy.get('.app__nav a').contains('Website').click();
+		cy.get('nav').contains('Settings').click();
+		// Ensure submenu item click despite animation
+		cy.get('nav').contains('Website').click({ force: true });
 		cy.get('button[id="plugins-button"]').click();
 
 		// Find and enable the plugin
@@ -34,8 +36,8 @@ describe('Custom Locale plugin tests', function() {
 		cy.get('#localeFilesForm a:contains("Cancel")').click();
 
 		// Check that the overridden locale key works.
-		cy.get('.app__userNav button').click();
-		cy.get('.app__userNav a:contains("Edit Profile")').click({ force: true }); // Force workaround for lack of .hover() in Cypress
+		cy.get('[data-cy="app-user-nav"] button').click();
+		cy.get('a:contains("Edit Profile")').click();
 		cy.wait(5000); // Delay to ensure cache refresh
 		cy.get('a:contains("Contact")').click();
 		cy.get('label[for^="affiliation-en"]:contains("Floog Bleem")');
