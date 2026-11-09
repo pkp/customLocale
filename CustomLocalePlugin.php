@@ -3,7 +3,7 @@
 /**
  * @file CustomLocalePlugin.php
  *
- * Copyright (c) 2016-2025 Language Science Press
+ * Copyright (c) 2016-2026 Language Science Press
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class CustomLocalePlugin
@@ -31,14 +31,23 @@ class CustomLocalePlugin extends GenericPlugin
     public const LOCALE_FOLDER = 'customLocale';
 
     /**
-     * @copydoc Plugin::register
+     * Register the plugin and, when it is enabled, set up the locale overrides,
+     * the settings tab and the handlers that manage the custom locale files.
+     *
+     * Custom locales are stored per context, so nothing is set up when the
+     * request has no context (site-wide pages and CLI tools).
      *
      * @param null|int $mainContextId
      */
     public function register($category, $path, $mainContextId = null): bool
     {
         $success = parent::register($category, $path, $mainContextId);
-        if (!$success || Application::isUnderMaintenance() || !$this->getEnabled() || $mainContextId === null) {
+        if (
+            !$success
+            || Application::isUnderMaintenance()
+            || !$this->getEnabled($mainContextId)
+            || !Application::get()->getRequest()->getContext()
+        ) {
             return $success;
         }
         $this->upgrade();
