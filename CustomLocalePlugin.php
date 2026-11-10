@@ -136,7 +136,12 @@ class CustomLocalePlugin extends GenericPlugin
     }
 
     /**
-     * Retrieves the path where custom locales are stored
+     * Retrieves the absolute path where custom locales are stored, creating
+     * the folder if it doesn't exist yet.
+     *
+     * The path is cached for the rest of the request. It must always be the
+     * absolute path, because it's matched against the paths of the files
+     * registered with the locale system.
      */
     public static function getStoragePath(): string
     {
@@ -146,12 +151,12 @@ class CustomLocalePlugin extends GenericPlugin
         }
 
         $contextFileManager = static::getContextFileManager();
-        $path = $contextFileManager->getBasePath() . static::LOCALE_FOLDER;
-        if (!is_dir($path)) {
-            $contextFileManager->mkdir($path);
+        $folder = $contextFileManager->getBasePath() . static::LOCALE_FOLDER;
+        if (!is_dir($folder)) {
+            $contextFileManager->mkdir($folder);
         }
 
-        return realpath($path);
+        return $path = realpath($folder);
     }
 
     /**
