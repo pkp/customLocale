@@ -3,7 +3,7 @@
 /**
  * @file controllers/grid/form/LocaleFileForm.php
  *
- * Copyright (c) 2016-2022 Language Science Press
+ * Copyright (c) 2016-2026 Language Science Press
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class LocaleFileForm
@@ -29,7 +29,8 @@ class LocaleFileForm extends Form
     }
 
     /**
-     * @copydoc Form::fetch
+     * Render the form that lists every locale key with its original
+     * translation and any custom translation saved for this locale.
      *
      * @param null|string $template
      */
@@ -47,7 +48,8 @@ class LocaleFileForm extends Form
                 'value' => $value
             ];
         }
-        $localeContents = file_exists($customLocalePath) ? reset(LocaleFile::loadArray($customLocalePath)['messages']) : [];
+        $customMessages = file_exists($customLocalePath) ? LocaleFile::loadArray($customLocalePath)['messages'] : [];
+        $localeContents = reset($customMessages) ?: [];
         $templateMgr = TemplateManager::getManager($request);
         $templateMgr->assign([
             'name' => Locale::getMetadata($this->locale)->getDisplayName(),
