@@ -24,6 +24,7 @@ use PKP\linkAction\LinkAction;
 use PKP\linkAction\request\RedirectAction;
 use PKP\plugins\GenericPlugin;
 use PKP\plugins\Hook;
+use Throwable;
 
 class CustomLocalePlugin extends GenericPlugin
 {
@@ -35,7 +36,10 @@ class CustomLocalePlugin extends GenericPlugin
      * the settings tab and the handlers that manage the custom locale files.
      *
      * Custom locales are stored per context, so nothing is set up when the
-     * request has no context (site-wide pages and CLI tools).
+     * request has no context (site-wide pages and CLI tools). Nothing is set
+     * up either when the folder that holds the custom locales can't be
+     * created, and the reason is logged instead, so the rest of the site
+     * keeps working.
      *
      * @param null|int $mainContextId
      */
@@ -48,6 +52,12 @@ class CustomLocalePlugin extends GenericPlugin
             || !$this->getEnabled($mainContextId)
             || !Application::get()->getRequest()->getContext()
         ) {
+            return $success;
+        }
+        try {
+            static::getStoragePath();
+        } catch (Exception $e) {
+            error_log("The customLocale plugin could not be set up.\n" . $e);
             return $success;
         }
         $this->upgrade();
@@ -142,6 +152,9 @@ class CustomLocalePlugin extends GenericPlugin
      * The path is cached for the rest of the request. It must always be the
      * absolute path, because it's matched against the paths of the files
      * registered with the locale system.
+     *
+     * @throws Exception When the folder doesn't exist and can't be created,
+     *   for example because the web server can't write to the files directory
      */
     public static function getStoragePath(): string
     {
@@ -156,7 +169,12 @@ class CustomLocalePlugin extends GenericPlugin
             $contextFileManager->mkdir($folder);
         }
 
-        return $path = realpath($folder);
+        $realPath = realpath($folder);
+        if ($realPath === false || !is_dir($realPath)) {
+            throw new Exception("Unable to create the custom locale folder {$folder}. Check that the web server can write to it.");
+        }
+
+        return $path = $realPath;
     }
 
     /**
@@ -223,13 +241,14 @@ class CustomLocalePlugin extends GenericPlugin
     }
 
     /**
-     * Attempts to upgrade the plugin
+     * Attempts to upgrade the plugin. Any error is logged rather than thrown,
+     * so a failed upgrade doesn't stop the plugin from registering.
      */
     public function upgrade(): void
     {
         try {
             (new I23_LocaleMigration($this))->up();
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             error_log("An exception happened while upgrading the customLocale plugin.\n" . $e);
         }
     }
