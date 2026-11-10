@@ -28,8 +28,10 @@ describe('Custom Locale plugin tests', function() {
 		cy.get('#customLocale a[href$=en]:contains("Edit")').click();
 		cy.wait(1000); // Form init
 		cy.get('#localeFilesForm input.pkpSearch__input').type('user.affiliation');
+		// Match the key exactly, as many other keys start with user.affiliation
+		cy.get('#localeFilesForm label:contains("Exact match") input').check();
 		cy.get('#localeFilesForm button.pkpButton:contains("Search")').click();
-		cy.get('#localeFilesForm table.customLocale__cellTable').should('have.length', 3)
+		cy.get('#localeFilesForm table.customLocale__cellTable').should('have.length', 1);
 		cy.get('#localeFilesForm td input[name="changes[user.affiliation]"]').type('Floog Bleem', {delay: 0});
 		cy.get('#localeFilesForm button:contains("Save and continue")').click();
 		cy.waitJQuery();
