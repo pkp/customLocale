@@ -3,7 +3,7 @@
 /**
  * @file controllers/grid/CustomLocaleGridCellProvider.php
  *
- * Copyright (c) 2016-2022 Language Science Press
+ * Copyright (c) 2016-2026 Language Science Press
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class CustomLocaleGridCellProvider
@@ -34,7 +34,7 @@ class CustomLocaleGridCellProvider extends GridCellProvider
      */
     public function getCellActions($request, $row, $column, $position = GridHandler::GRID_ACTION_POSITION_DEFAULT): array
     {
-        /** @var CustomLocale */
+        /** @var CustomLocale $customLocale */
         $customLocale = $row->getData();
         return match ($column->getId()) {
             'action' => [new LinkAction(
@@ -61,7 +61,7 @@ class CustomLocaleGridCellProvider extends GridCellProvider
      */
     public function getTemplateVarsFromRowColumn($row, $column): array
     {
-        /** @var CustomLocale */
+        /** @var CustomLocale $customLocale */
         $customLocale = $row->getData();
 
         return match ($column->getId()) {

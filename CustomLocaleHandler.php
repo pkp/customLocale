@@ -3,7 +3,7 @@
 /**
  * @file CustomLocaleHandler.php
  *
- * Copyright (c) 2016-2022 Language Science Press
+ * Copyright (c) 2016-2026 Language Science Press
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class CustomLocaleHandler
@@ -40,7 +40,7 @@ class CustomLocaleHandler extends Handler
 
         // iterate through all customized files
         foreach ($files as $localeFile) {
-            /** @var Translation[] */
+            /** @var Translation[] $customTranslations */
             $customTranslations = LocaleFile::loadTranslations($localeFile)->getTranslations();
             if (!count($customTranslations)) {
                 continue;

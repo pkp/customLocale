@@ -3,7 +3,7 @@
 /**
  * @file controllers/grid/CustomLocaleGridHandler.php
  *
- * Copyright (c) 2016-2022 Language Science Press
+ * Copyright (c) 2016-2026 Language Science Press
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class CustomLocaleGridHandler
@@ -34,7 +34,6 @@ use PKP\security\Role;
 class CustomLocaleGridHandler extends GridHandler
 {
     protected LocaleFileForm $form;
-
     protected static CustomLocalePlugin $plugin;
 
     /**
@@ -81,7 +80,9 @@ class CustomLocaleGridHandler extends GridHandler
             $changes = [];
         }
 
-        if (!$request->checkCSRF()) return new JSONMessage(false);
+        if (!$request->checkCSRF()) {
+            return new JSONMessage(false);
+        }
 
         if (!$locale) {
             return new JSONMessage(false);
