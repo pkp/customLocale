@@ -38,9 +38,8 @@ describe('Custom Locale plugin tests', function() {
 		cy.get('#localeFilesForm a:contains("Cancel")').click();
 
 		// Check that the overridden locale key works.
-		cy.get('[data-cy="app-user-nav"] > button').click();
-		cy.get('a:contains("Edit Profile")').click();
 		cy.wait(5000); // Delay to ensure cache refresh
+		cy.visit('/index.php/publicknowledge/user/profile');
 		cy.get('a:contains("Contact")').click();
 		cy.get('label[for^="affiliation-en"]:contains("Floog Bleem")');
 	});
