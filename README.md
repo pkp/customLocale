@@ -1,10 +1,11 @@
-- Custom Locale Plugin
+# Custom Locale Plugin
+
 - Version: (see version.xml)
 - Author: Carola Fanselow (updates by Alec Smecher, Erik Hanson)
 
- Applications | main  | 3.4.0       | 3.3.0  |
-| ---- | ---- | ---- |----- |
-| OJS/OMP/OS      | [![customlocale](https://github.com/pkp/customlocale/actions/workflows/main.yml/badge.svg)](https://github.com/pkp/customlocale/actions/workflows/main.yml)                   | [![customlocale](https://github.com/pkp/customlocale/actions/workflows/stable-3_4_0.yml/badge.svg)](https://github.com/pkp/customlocale/actions/workflows/stable-3_4_0.yml)                   | [![customlocale](https://github.com/pkp/customlocale/actions/workflows/stable-3_3_0.yml/badge.svg)](https://github.com/pkp/customlocale/actions/workflows/stable-3_3_0.yml)             |
+| Applications | main                                                                                                                                                        | 3.4.0                                                                                                                                                                       | 3.3.0                                                                                                                                                                       |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| OJS/OMP/OS   | [![customlocale](https://github.com/pkp/customlocale/actions/workflows/main.yml/badge.svg)](https://github.com/pkp/customlocale/actions/workflows/main.yml) | [![customlocale](https://github.com/pkp/customlocale/actions/workflows/stable-3_4_0.yml/badge.svg)](https://github.com/pkp/customlocale/actions/workflows/stable-3_4_0.yml) | [![customlocale](https://github.com/pkp/customlocale/actions/workflows/stable-3_3_0.yml/badge.svg)](https://github.com/pkp/customlocale/actions/workflows/stable-3_3_0.yml) |
 
 ## About
 
@@ -29,7 +30,7 @@ This plugin is licensed under the GNU General Public License v3.
 
 ## System Requirements
 
-This plugin is compatible with OJS/OMP/OPS. Use the Plugin Gallery to install the plugin in order to ensure that you are using a compatible release.
+This plugin is compatible with OJS/OMP/OPS. Use the Plugin Gallery to install the plugin to ensure that you are using a compatible release.
 
 ## Installation
 

@@ -1,0 +1,3 @@
+customLocale/.github
+customLocale/cypress
+customLocale/exclusions.txt

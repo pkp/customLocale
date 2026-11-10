@@ -3,7 +3,7 @@
 /**
  * @file CustomLocalePlugin.php
  *
- * Copyright (c) 2016-2025 Language Science Press
+ * Copyright (c) 2016-2026 Language Science Press
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class CustomLocalePlugin
@@ -24,6 +24,7 @@ use PKP\linkAction\LinkAction;
 use PKP\linkAction\request\RedirectAction;
 use PKP\plugins\GenericPlugin;
 use PKP\plugins\Hook;
+use Throwable;
 
 class CustomLocalePlugin extends GenericPlugin
 {
@@ -31,14 +32,32 @@ class CustomLocalePlugin extends GenericPlugin
     public const LOCALE_FOLDER = 'customLocale';
 
     /**
-     * @copydoc Plugin::register
+     * Register the plugin and, when it is enabled, set up the locale overrides,
+     * the settings tab and the handlers that manage the custom locale files.
+     *
+     * Custom locales are stored per context, so nothing is set up when the
+     * request has no context (site-wide pages and CLI tools). Nothing is set
+     * up either when the folder that holds the custom locales can't be
+     * created, and the reason is logged instead, so the rest of the site
+     * keeps working.
      *
      * @param null|int $mainContextId
      */
     public function register($category, $path, $mainContextId = null): bool
     {
         $success = parent::register($category, $path, $mainContextId);
-        if (!$success || Application::isUnderMaintenance() || !$this->getEnabled() || $mainContextId === null) {
+        if (
+            !$success
+            || Application::isUnderMaintenance()
+            || !$this->getEnabled($mainContextId)
+            || !Application::get()->getRequest()->getContext()
+        ) {
+            return $success;
+        }
+        try {
+            static::getStoragePath();
+        } catch (Exception $e) {
+            error_log("The customLocale plugin could not be set up.\n" . $e);
             return $success;
         }
         $this->upgrade();
@@ -127,7 +146,15 @@ class CustomLocalePlugin extends GenericPlugin
     }
 
     /**
-     * Retrieves the path where custom locales are stored
+     * Retrieves the absolute path where custom locales are stored, creating
+     * the folder if it doesn't exist yet.
+     *
+     * The path is cached for the rest of the request. It must always be the
+     * absolute path, because it's matched against the paths of the files
+     * registered with the locale system.
+     *
+     * @throws Exception When the folder doesn't exist and can't be created,
+     *   for example because the web server can't write to the files directory
      */
     public static function getStoragePath(): string
     {
@@ -137,22 +164,31 @@ class CustomLocalePlugin extends GenericPlugin
         }
 
         $contextFileManager = static::getContextFileManager();
-        $path = $contextFileManager->getBasePath() . static::LOCALE_FOLDER;
-        if (!is_dir($path)) {
-            $contextFileManager->mkdir($path);
+        $folder = $contextFileManager->getBasePath() . static::LOCALE_FOLDER;
+        if (!is_dir($folder)) {
+            $contextFileManager->mkdir($folder);
         }
 
-        return realpath($path);
+        $realPath = realpath($folder);
+        if ($realPath === false || !is_dir($realPath)) {
+            throw new Exception("Unable to create the custom locale folder {$folder}. Check that the web server can write to it.");
+        }
+
+        return $path = $realPath;
     }
 
     /**
-     * Retrieves a translator instance without the localization overrides
+     * Retrieves a translator for the given locale without the custom locale
+     * overrides, so the original translations can be shown alongside the
+     * custom ones.
+     *
+     * One translator is cached per locale for the rest of the request.
      */
     public static function getTranslator(string $locale): Translator
     {
-        static $translator;
-        if ($translator) {
-            return $translator;
+        static $translators = [];
+        if (isset($translators[$locale])) {
+            return $translators[$locale];
         }
 
         $bundle = Locale::getBundle($locale, false);
@@ -161,7 +197,7 @@ class CustomLocalePlugin extends GenericPlugin
         // Remove custom locale entries from the bundle in order to retrieve the original translation
         $entries = array_filter($entries, fn (string $path) => !str_starts_with($path, $customLocalePath), ARRAY_FILTER_USE_KEY);
         $bundle->setEntries($entries);
-        return $translator = $bundle->getTranslator();
+        return $translators[$locale] = $bundle->getTranslator();
     }
 
     /**
@@ -205,13 +241,14 @@ class CustomLocalePlugin extends GenericPlugin
     }
 
     /**
-     * Attempts to upgrade the plugin
+     * Attempts to upgrade the plugin. Any error is logged rather than thrown,
+     * so a failed upgrade doesn't stop the plugin from registering.
      */
     public function upgrade(): void
     {
         try {
             (new I23_LocaleMigration($this))->up();
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             error_log("An exception happened while upgrading the customLocale plugin.\n" . $e);
         }
     }

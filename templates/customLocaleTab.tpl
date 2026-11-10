@@ -8,6 +8,6 @@
  * Custom locale plugin -- add a new tab to the settings interface.
  *}
 <tab id="customLocale" label="{translate key="plugins.generic.customLocale.customLocale"}">
-	{capture assign=customLocaleGridUrl}{url router=$smarty.const.ROUTE_COMPONENT component="plugins.generic.customLocale.controllers.grid.CustomLocaleGridHandler" op="fetchGrid" escape=false}{/capture}
+	{capture assign=customLocaleGridUrl}{url router=PKP\core\PKPApplication::ROUTE_COMPONENT component="plugins.generic.customLocale.controllers.grid.CustomLocaleGridHandler" op="fetchGrid" escape=false}{/capture}
 	{load_url_in_div id="customLocaleGridContainer" url=$customLocaleGridUrl}
 </tab>

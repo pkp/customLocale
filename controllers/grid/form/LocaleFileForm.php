@@ -3,7 +3,7 @@
 /**
  * @file controllers/grid/form/LocaleFileForm.php
  *
- * Copyright (c) 2016-2022 Language Science Press
+ * Copyright (c) 2016-2026 Language Science Press
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class LocaleFileForm
@@ -16,6 +16,7 @@ use APP\template\TemplateManager;
 use Exception;
 use PKP\facades\Locale;
 use PKP\form\Form;
+use PKP\i18n\interfaces\LocaleInterface;
 use PKP\i18n\translation\LocaleFile;
 
 class LocaleFileForm extends Form
@@ -29,7 +30,13 @@ class LocaleFileForm extends Form
     }
 
     /**
-     * @copydoc Form::fetch
+     * Render the form that lists every locale key with its original
+     * translation and any custom translation saved for this locale, sorted
+     * by locale key.
+     *
+     * Keys that have no translation in this locale are read from the English
+     * locale files and listed with an empty original translation, so they can
+     * be customized too.
      *
      * @param null|string $template
      */
@@ -40,14 +47,18 @@ class LocaleFileForm extends Form
         }
 
         $customLocalePath = CustomLocalePlugin::getStoragePath() . "/{$this->locale}/locale.po";
+        $entries = CustomLocalePlugin::getTranslator($this->locale)->getEntries()
+            + array_fill_keys(array_keys(CustomLocalePlugin::getTranslator(LocaleInterface::DEFAULT_LOCALE)->getEntries()), '');
+        ksort($entries);
         $referenceLocaleContents = [];
-        foreach (CustomLocalePlugin::getTranslator($this->locale)->getEntries() as $key => $value) {
+        foreach ($entries as $key => $value) {
             $referenceLocaleContents[] = [
                 'localeKey' => $key,
                 'value' => $value
             ];
         }
-        $localeContents = file_exists($customLocalePath) ? reset(LocaleFile::loadArray($customLocalePath)['messages']) : [];
+        $customMessages = file_exists($customLocalePath) ? LocaleFile::loadArray($customLocalePath)['messages'] : [];
+        $localeContents = reset($customMessages) ?: [];
         $templateMgr = TemplateManager::getManager($request);
         $templateMgr->assign([
             'name' => Locale::getMetadata($this->locale)->getDisplayName(),
