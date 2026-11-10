@@ -160,13 +160,17 @@ class CustomLocalePlugin extends GenericPlugin
     }
 
     /**
-     * Retrieves a translator instance without the localization overrides
+     * Retrieves a translator for the given locale without the custom locale
+     * overrides, so the original translations can be shown alongside the
+     * custom ones.
+     *
+     * One translator is cached per locale for the rest of the request.
      */
     public static function getTranslator(string $locale): Translator
     {
-        static $translator;
-        if ($translator) {
-            return $translator;
+        static $translators = [];
+        if (isset($translators[$locale])) {
+            return $translators[$locale];
         }
 
         $bundle = Locale::getBundle($locale, false);
@@ -175,7 +179,7 @@ class CustomLocalePlugin extends GenericPlugin
         // Remove custom locale entries from the bundle in order to retrieve the original translation
         $entries = array_filter($entries, fn (string $path) => !str_starts_with($path, $customLocalePath), ARRAY_FILTER_USE_KEY);
         $bundle->setEntries($entries);
-        return $translator = $bundle->getTranslator();
+        return $translators[$locale] = $bundle->getTranslator();
     }
 
     /**
