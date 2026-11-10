@@ -38,7 +38,7 @@ describe('Custom Locale plugin tests', function() {
 		cy.get('#localeFilesForm a:contains("Cancel")').click();
 
 		// Check that the overridden locale key works.
-		cy.get('[data-cy="app-user-nav"] button').click();
+		cy.get('[data-cy="app-user-nav"] > button').click();
 		cy.get('a:contains("Edit Profile")').click();
 		cy.wait(5000); // Delay to ensure cache refresh
 		cy.get('a:contains("Contact")').click();
